@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site';
+
+// Waveform shape from the original design (deterministic, 48 bars).
+const N = 48;
+const bars = Array.from({ length: N }, (_, i) =>
+  18 + Math.round(Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.45)) * 82)
+);
+---
+<section id="demo" class="demo">
+  <div class="demo-copy">
+    <p class="eyebrow">(Demo Call)</p>
+    <h2 class="h-section">Talk it<br />through<span class="dot">.</span></h2>
+    <p class="lede">A real conversation about your site, your ads, and what’s actually holding your funnel back.</p>
+  </div>
+  <div class="player" data-player data-duration="83">
+    <div class="player-meta">
+      <span>{site.demoCallLabel}</span>
+      <span><span class="led" aria-hidden="true"></span>Recorded · Transcribed</span>
+    </div>
+    <div class="wave" aria-hidden="true">
+      {bars.map((h) => <i style={`height:${h}%`}></i>)}
+    </div>
+    {site.demoAudio && <audio src={site.demoAudio} preload="metadata" data-audio></audio>}
+    <button type="button" class="cta" data-toggle aria-pressed="false">
+      <svg class="i-play" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"></path></svg>
+      <svg class="i-pause" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"></path></svg>
+      <span data-label>Replay demo call</span>
+    </button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-player]').forEach((player) => {
+    const bars = Array.from(player.querySelectorAll<HTMLElement>('.wave i'));
+    const btn = player.querySelector<HTMLButtonElement>('[data-toggle]')!;
+    const label = player.querySelector<HTMLElement>('[data-label]')!;
+    const iPlay = btn.querySelector<SVGElement>('.i-play')!;
+    const iPause = btn.querySelector<SVGElement>('.i-pause')!;
+    const audio = player.querySelector<HTMLAudioElement>('[data-audio]');
+    const fakeDuration = Number(player.dataset.duration) || 83;
+
+    let progress = 0;
+    let playing = false;
+    let timer: number | undefined;
+
+    const paint = () => bars.forEach((b, i) => b.classList.toggle('on', i / bars.length < progress));
+    const setPlaying = (on: boolean) => {
+      playing = on;
+      label.textContent = on ? 'Pause demo call' : 'Replay demo call';
+      btn.setAttribute('aria-pressed', String(on));
+      iPlay.style.display = on ? 'none' : '';
+      iPause.style.display = on ? '' : 'none';
+    };
+
+    if (audio) {
+      // Real recording: the waveform follows the audio position.
+      audio.addEventListener('timeupdate', () => {
+        progress = audio.duration ? audio.currentTime / audio.duration : 0;
+        paint();
+      });
+      audio.addEventListener('ended', () => { progress = 1; paint(); setPlaying(false); });
+      btn.addEventListener('click', () => {
+        if (playing) { audio.pause(); setPlaying(false); return; }
+        if (audio.ended) audio.currentTime = 0;
+        audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      });
+    } else {
+      // No recording yet: silent visual replay, as in the original design.
+      btn.addEventListener('click', () => {
+        if (playing) { clearInterval(timer); setPlaying(false); return; }
+        if (progress >= 1) progress = 0;
+        setPlaying(true);
+        timer = window.setInterval(() => {
+          progress += 1 / fakeDuration;
+          if (progress >= 1) { progress = 1; clearInterval(timer); setPlaying(false); }
+          paint();
+        }, 1000);
+      });
+    }
+  });
+</script>

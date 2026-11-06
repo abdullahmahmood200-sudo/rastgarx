@@ -1,0 +1,25 @@
+---
+const pains = [
+  { title: 'A site that doesn’t convert', body: 'An outdated, slow website sends visitors away before they ever act.' },
+  { title: 'Ads that miss the mark', body: 'Generic visuals and weak copy that get scrolled past instead of clicked.' },
+  { title: 'A brand that goes unnoticed', body: 'No consistent presence means people forget you exist by the time they’re ready to buy.' },
+];
+---
+<section id="problem" class="problem">
+  <div class="problem-head">
+    <div>
+      <span class="tag">THE PROBLEM</span>
+      <h2 class="h-section">Your business is<br />leaking revenue<span class="dot">.</span></h2>
+    </div>
+    <p class="lede muted">They’re not separate problems. They’re one broken funnel.</p>
+  </div>
+  <div class="grid-3">
+    {pains.map((p, i) => (
+      <div class="pain">
+        <span class="accent" style="font-size: 17px">({String(i + 1).padStart(2, '0')})</span>
+        <h3>{p.title}</h3>
+        <p class="body muted">{p.body}</p>
+      </div>
+    ))}
+  </div>
+</section>

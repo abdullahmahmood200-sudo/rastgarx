@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+
+const open = Math.max(0, Math.min(5, site.openSlots));
+const slots = [1, 2, 3, 4, 5].map((n) => ({ num: '0' + n, open: n > 5 - open }));
+---
+<section id="book" class="booking center-section">
+  <span class="tag">READY TO GET STARTED?</span>
+  <h2 class="h-center">Ready to put your business on autopilot<span class="dot">?</span></h2>
+  <p class="muted">Book your free call today and see how a rebuilt site and fresh ad creatives can transform your funnel.</p>
+  <div class="slots">
+    {slots.map((s) => s.open ? (
+      <a class="slot is-open lift" href="#contact" aria-label={`Slot ${s.num} available — book a free call`}>
+        <span class="slot-num">SLOT<br />{s.num}</span>
+        <span class="slot-badge">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-3 7-7 0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-2 2-5 5-5 8 0 4 3 7 7 7z"></path></svg>
+          AVAILABLE
+        </span>
+      </a>
+    ) : (
+      <div class="slot is-booked">
+        <svg class="strike" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100"><line x1="0" y1="100" x2="100" y2="0" stroke="#4A4A4E" stroke-width="0.6" vector-effect="non-scaling-stroke"></line></svg>
+        <span class="slot-num">SLOT<br />{s.num}</span>
+        <span class="slot-badge">BOOKED</span>
+      </div>
+    ))}
+  </div>
+  <a class="cta" href="#contact">BOOK A FREE CALL</a>
+</section>

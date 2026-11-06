@@ -1,0 +1,38 @@
+---
+const services = [
+  {
+    title: ['Animated web', 'development'],
+    body: 'A high-performance site engineered to turn visitors into customers.',
+    points: ['Custom design', 'Brand kit', 'Animations & interactions', 'Mobile-first & fast-loading'],
+    link: { href: '/work', label: 'VIEW OUR WORK' },
+    green: true,
+  },
+  {
+    title: ['Ads'],
+    body: 'Campaign posters, billboards and social creatives that put your product front and centre and stop the scroll.',
+    points: ['Product-first concepts', 'Posters, billboards & social', 'Built to stop the scroll', 'Every format'],
+    link: { href: '/work', label: 'VIEW OUR WORK' },
+  },
+  {
+    title: ['AI voice', 'operator'],
+    body: 'An operator that answers on the first ring at 2am, holds a real conversation, and books the job before the caller tries someone else.',
+    points: ['Answers every call', 'Books straight into your calendar', 'Sounds like your business', 'Knows when to hand over'],
+    link: { href: '#demo', label: 'HEAR OUR WORK' },
+  },
+];
+---
+<section id="work" class="services center-section">
+  <span class="tag">WHAT WE BUILD</span>
+  <h2 class="h-center">One system. Three moving parts.<br /><span class="muted">Built to run as one.</span></h2>
+  <div class="cards">
+    {services.map((s, i) => (
+      <article class:list={['card', 'lift', { 'is-green': s.green }]}>
+        <span>({String(i + 1).padStart(2, '0')})</span>
+        <h3>{s.title.map((line, j) => <>{j > 0 && <br />}{line}</>)}</h3>
+        <p class="body">{s.body}</p>
+        <ul>{s.points.map((p) => <li>{p}</li>)}</ul>
+        <a class="card-link" href={s.link.href}>{s.link.label}</a>
+      </article>
+    ))}
+  </div>
+</section>

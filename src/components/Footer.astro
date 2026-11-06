@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import Arrow from './Arrow.astro';
+import { site, telHref, mailHref } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+<footer id="contact" class="footer">
+  <div class="footer-brand" aria-hidden="true">
+    <Logo size="100%" />
+    <span class="footer-word">RASTUP<span class="dot">.</span></span>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="d-fill" style="left: 47%; top: 170px"></span>
+    <span class="d-ring" style="left: 62%; top: 230px; width: 24px; height: 24px"></span>
+  </div>
+  <div class="footer-cols">
+    <div class="footer-about">
+      <span class="footer-label">ABOUT</span>
+      <p>Rastup builds animated, high-converting websites, ready-to-run ad creatives and AI voice operators — one growth system, serving businesses nationwide.</p>
+      <p class="footer-motto">We build.<br /><span class="accent">You profit.</span></p>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <span class="footer-label">STUDIO</span>
+        <span>{site.city}<br />{site.country}</span>
+      </div>
+      <div>
+        <span class="footer-label">CONTACT</span>
+        <span class="stack"><a href={mailHref}>{site.email}</a><a href={telHref}>{site.phone}</a></span>
+      </div>
+      <div>
+        <span class="footer-label">EXPLORE</span>
+        <span class="stack">
+          <a href="#industries">Industries</a>
+          <a href="#locations">Locations</a>
+          <a href="#international">International</a>
+          <a href="#who-we-help">Who We Help</a>
+        </span>
+      </div>
+      <div>
+        <span class="footer-label">LEGAL</span>
+        <span class="stack"><a href="#privacy">Privacy Policy</a><a href="#terms">Terms &amp; Conditions</a></span>
+      </div>
+      <div>
+        <span class="footer-label">GET STARTED</span>
+        <a class="footer-cta" href="#book">Book a free call <Arrow /></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {year} {site.name}<span class="footer-bottom-extra"> · {site.city}, {site.country} · {site.phone} · {site.email}</span></span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>

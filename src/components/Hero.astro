@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site';
+const isVideo = !!site.hero && /\.(mp4|webm)$/i.test(site.hero);
+---
+<section class="hero-head">
+  <p class="eyebrow">(Rastup values)</p>
+  <h1 class="display">Your business<br />running on autopilot<span class="dot">.</span></h1>
+</section>
+
+<div class="hero-media">
+  {site.hero && (isVideo
+    ? <video src={site.hero} autoplay muted loop playsinline aria-label={site.heroAlt}></video>
+    : <img src={site.hero} alt={site.heroAlt} width="1400" height="520" fetchpriority="high" />)}
+</div>

@@ -1,0 +1,52 @@
+---
+import Logo from './Logo.astro';
+import Arrow from './Arrow.astro';
+
+interface Link { href: string; label: string; current?: boolean }
+interface Props { links?: Link[]; homeHref?: string; bookHref?: string }
+
+const {
+  links = [
+    { href: '#problem', label: 'PROBLEM' },
+    { href: '#solution', label: 'SOLUTION' },
+    { href: '#work', label: 'THE WORK' },
+    { href: '#contact', label: 'CONTACT' },
+  ],
+  homeHref = '#top',
+  bookHref = '#book',
+} = Astro.props;
+---
+<header class="header" data-header>
+  <a class="brand" href={homeHref} aria-label="Rastup home">
+    <Logo />
+    <span class="brand-word">RASTUP<span class="dot">.</span></span>
+  </a>
+  <div class="header-right">
+    <nav class="nav" id="main-nav" aria-label="Main">
+      {links.map((l) => <a href={l.href} class:list={{ 'is-current': l.current }} aria-current={l.current ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu" data-menu-btn>
+      <svg class="i-open" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg>
+      <svg class="i-close" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+    <a class="round" href={bookHref} aria-label="Book a free call"><Arrow size={20} stroke={2.2} /></a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const btn = header?.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  if (header && btn) {
+    const set = (open: boolean) => {
+      header.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    btn.addEventListener('click', () => set(!header.classList.contains('is-open')));
+    header.querySelectorAll('.nav a').forEach((a) => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target as Node)) set(false);
+    });
+  }
+</script>

@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import Arrow from '../../components/Arrow.astro';
+import { projects, slugify, projectHref, shotLooks, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project, index) => ({ params: { slug: slugify(project.name) }, props: { project, index } }));
+}
+
+interface Props { project: Project; index: number }
+const { project: p, index } = Astro.props;
+
+const placeholderLabels = ['Homepage hero', 'Key page', 'Mobile screens', 'Details & motion'];
+const shots = p.gallery?.length
+  ? p.gallery.map((s) => ({ ...s, look: null }))
+  : placeholderLabels.map((label, i) => ({ src: null, alt: `${p.name} — ${label}`, look: shotLooks[i] }));
+
+const next = projects[(index + 1) % projects.length];
+---
+<Base
+  title={`${p.name} — ${p.services} | Rastup`}
+  description={p.description ?? `${p.name} (${p.category}): ${p.services} by Rastup, ${p.year}.`}
+>
+  <div class="page case" id="top">
+    <div class="case-bar">
+      <a class="case-close" href="/work" aria-label="Close and go back to all work">CLOSE
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"></path></svg></a>
+    </div>
+
+    <main>
+      <section class="case-head">
+        <div class="case-title">
+          <h1>{p.name}<span class="dot">.</span></h1>
+          <span class="muted">({p.category})</span>
+        </div>
+        <div class="case-info">
+          <div class="case-meta">
+            <span>{p.services}</span>
+            <span class="accent">{p.year}</span>
+          </div>
+          {p.description && <p class="lede">{p.description}</p>}
+          <p class="case-rights muted">©{p.year} All images and materials are owned by {p.name} or Rastup.</p>
+          {p.liveUrl && (
+            <a class="case-live" href={p.liveUrl} target="_blank" rel="noopener">VISIT LIVE SITE <Arrow /></a>
+          )}
+        </div>
+      </section>
+
+      <div class="decor case-decor" aria-hidden="true">
+        <span class="d-fill" style="left: 60%; top: 40px; width: 10px; height: 10px"></span>
+        <span class="d-ring" style="left: 61.5%; top: 52px"></span>
+      </div>
+
+      <div class="case-gallery" tabindex="0" role="region" aria-label={`${p.name} project images`}>
+        {shots.map((s) => (
+          <figure class="case-shot" style={s.look ? `--bg:${s.look.bg};--dot:${s.look.dot};--ring:${s.look.ring}` : undefined}>
+            {s.src
+              ? <img src={s.src} alt={s.alt} loading="lazy" />
+              : <><i class="pd" aria-hidden="true"></i><i class="pr" aria-hidden="true"></i><span class="visually-hidden">{s.alt} (image coming soon)</span></>}
+          </figure>
+        ))}
+      </div>
+
+      <nav class="case-next" aria-label="Next project">
+        <span class="muted">Next project</span>
+        <a href={projectHref(next)}><span>{next.name}<span class="dot">.</span></span><Arrow size={28} /></a>
+      </nav>
+    </main>
+  </div>
+</Base>

@@ -1,0 +1,34 @@
+---
+import Arrow from './Arrow.astro';
+
+const features = [
+  { title: 'High-converting design', body: 'Every page built to move visitors toward one action.' },
+  { title: 'Custom animations', body: 'Smooth, purposeful motion that keeps people engaged instead of bouncing.' },
+  { title: 'Ad generation', body: 'Images, copy, and variations, ready for whatever platform you run.' },
+  { title: 'Multiple formats', body: 'Different sizes and versions so you’re covered across placements.' },
+];
+---
+<section id="solution" class="solution">
+  <div class="solution-copy">
+    <p class="eyebrow">(The Solution)</p>
+    <h2 class="h-section">Meet your<br />growth system<span class="dot">.</span></h2>
+    <span class="tag-accent">Rastup Web + Ads</span>
+    <p class="lede">A custom-built, animated website paired with ready-to-run ad creatives that stop the scroll and convert once the click lands.</p>
+    <div class="foundation">
+      <span>The foundation it runs on</span>
+      <span>It starts before the click happens.</span>
+    </div>
+    <a class="link-underline" href="#work">See what we build <Arrow /></a>
+  </div>
+  <div class="features">
+    {features.map((f, i) => (
+      <div class="feature">
+        <span>{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <h3>{f.title}</h3>
+          <p class="body muted">{f.body}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

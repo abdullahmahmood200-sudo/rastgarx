@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+import { projects, workStats, looks, projectHref } from '../data/projects';
+
+const items = projects.map((p, i) => ({ ...p, href: projectHref(p), look: looks[i % looks.length] }));
+const links = [
+  { href: '/work', label: 'WORK', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/#book', label: 'CAREER' },
+  { href: '#contact', label: 'CONTACT' },
+];
+---
+<Base title="Work — Rastup" description="Selected websites, ad campaigns and brand work by Rastup. We take on only five new clients a year.">
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="decor" aria-hidden="true">
+        <span class="d-fill" style="left: 0; top: -8px"></span>
+        <span class="d-ring" style="left: 12%; top: 54px"></span>
+      </div>
+      <div class="rule"></div>
+
+      <main>
+        <section class="info work-intro">
+          <div class="info-cols work-stats">
+            {workStats.clients != null && (
+              <div class="info-col">
+                <span>Collaborations</span>
+                <span><span class="accent">&gt;</span> {workStats.clients} Clients &amp; Partners</span>
+              </div>
+            )}
+            <div class="info-col">
+              <span>Results</span>
+              <span><span class="accent">&gt;</span> {workStats.projects} Projects</span>
+            </div>
+          </div>
+          <p class="lede work-pitch">Unlike most agencies, we don’t take on every client who can pay the bill. At Rastup, we work with only five new clients a year: brands we believe in and can grow with. Keeping it small lets us put real care into every site, every ad and every call flow, so each launch converts from day one.</p>
+        </section>
+
+        <section class="work-head">
+          <div>
+            <p class="eyebrow">(Rastup values)</p>
+            <h1 class="display">We trust in ownership<span class="dot">.</span></h1>
+          </div>
+          <div class="view-toggle" role="group" aria-label="View" data-view-toggle>
+            <button type="button" data-view="list" aria-pressed="true">
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>List</button>
+            <button type="button" data-view="grid" aria-pressed="false">
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="6" height="6"></rect><rect x="14" y="4" width="6" height="6"></rect><rect x="4" y="14" width="6" height="6"></rect><rect x="14" y="14" width="6" height="6"></rect></svg>Grid</button>
+          </div>
+        </section>
+
+        <!-- List view: rows with a preview card that follows the cursor -->
+        <section class="work-list" data-work-list aria-label="Projects">
+          {items.map((p, i) => (
+              <a class="work-row" href={p.href} data-index={i}>
+                <span class="work-row-title">
+                  <span class="work-row-name">{p.name}</span>
+                  <span class="work-cat">({p.category})</span>
+                </span>
+                <span class="work-row-meta">
+                  <span>{p.services}</span>
+                  <span>{p.year}</span>
+                </span>
+              </a>
+          ))}
+          <div class="work-preview" aria-hidden="true" data-preview>
+            {items.map((p, i) => (
+              <div class="work-panel" data-panel={i} style={`--bg:${p.look.bg};--fg:${p.look.fg};--dot:${p.look.dot};--ring:${p.look.ring}`}>
+                {p.cover ? <img src={p.cover} alt="" loading="lazy" /> : <><i class="pd"></i><i class="pr"></i></>}
+                <span class="work-panel-name">{p.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Grid view -->
+        <section class="work-grid" data-work-grid aria-label="Projects" hidden>
+          {items.map((p) => (
+              <a class="work-tile" href={p.href}>
+                <div class="work-tile-frame">
+                  <div class="work-panel work-tile-media" style={`--bg:${p.look.bg};--fg:${p.look.fg};--dot:${p.look.dot};--ring:${p.look.ring}`}>
+                    {p.cover ? <img src={p.cover} alt={p.name} loading="lazy" /> : <><i class="pd"></i><i class="pr"></i></>}
+                  </div>
+                </div>
+                <span class="work-tile-head">
+                  <span class="work-tile-title">
+                    <span class="work-tile-name">{p.name}</span>
+                    <span class="work-cat">({p.category})</span>
+                  </span>
+                  <span class="muted work-num">{p.year}</span>
+                </span>
+                <span class="muted work-tile-services">{p.services}</span>
+              </a>
+          ))}
+        </section>
+
+        <section class="work-cta center-section">
+          <span class="tag">WORK WITH US</span>
+          <h2 class="h-center">Your project could be next<span class="dot">.</span></h2>
+          <a class="cta" href="/#book">BOOK A FREE CALL</a>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>
+
+<script>
+  // List / Grid toggle (remembered per visitor).
+  const toggle = document.querySelector<HTMLElement>('[data-view-toggle]');
+  const list = document.querySelector<HTMLElement>('[data-work-list]');
+  const grid = document.querySelector<HTMLElement>('[data-work-grid]');
+  if (toggle && list && grid) {
+    const buttons = Array.from(toggle.querySelectorAll<HTMLButtonElement>('[data-view]'));
+    const show = (view: string) => {
+      list.hidden = view !== 'list';
+      grid.hidden = view !== 'grid';
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+      try { localStorage.setItem('rastup-work-view', view); } catch {}
+    };
+    buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.view!)));
+    let saved: string | null = null;
+    try { saved = localStorage.getItem('rastup-work-view'); } catch {}
+    if (saved === 'grid') show('grid');
+  }
+
+  // Hover preview in the list view (mouse/trackpad only).
+  const preview = document.querySelector<HTMLElement>('[data-preview]');
+  if (list && preview && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const panels = Array.from(preview.querySelectorAll<HTMLElement>('[data-panel]'));
+    const activate = (i: number) => {
+      panels.forEach((p, j) => p.classList.toggle('is-active', j === i));
+      preview.classList.add('is-on');
+    };
+    const hide = () => preview.classList.remove('is-on');
+    const place = (clientX: number, clientY: number) => {
+      const r = list.getBoundingClientRect();
+      const w = preview.offsetWidth;
+      let x = clientX - r.left;
+      if (x + 40 + w > r.width) x = x - w - 80;
+      preview.style.left = x + 40 + 'px';
+      preview.style.top = clientY - r.top - preview.offsetHeight / 2 + 'px';
+    };
+    list.addEventListener('mousemove', (e) => place(e.clientX, e.clientY));
+    list.addEventListener('mouseleave', hide);
+    list.querySelectorAll<HTMLElement>('.work-row').forEach((row) => {
+      const i = Number(row.dataset.index);
+      row.addEventListener('mouseenter', () => activate(i));
+      row.addEventListener('focus', () => {
+        const r = row.getBoundingClientRect();
+        place(r.left + r.width * 0.45, r.top + r.height / 2);
+        activate(i);
+      });
+      row.addEventListener('blur', hide);
+    });
+  }
+</script>
