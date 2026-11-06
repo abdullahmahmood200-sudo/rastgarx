@@ -24,6 +24,100 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
   </head>
   <body>
-    <slot />
+    <!-- Fixed-position things live outside the smooth-scroll wrapper. -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <slot />
+      </div>
+    </div>
+
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      /* ---------- Smooth scroll ---------- */
+      let smoother: ScrollSmoother | null = null;
+      if (!reduceMotion) {
+        smoother = ScrollSmoother.create({
+          wrapper: '#smooth-wrapper',
+          content: '#smooth-content',
+          smooth: 1.1,          // seconds to "catch up" — higher is floatier
+          effects: true,        // enables data-speed / data-lag attributes
+          smoothTouch: false,   // native scrolling on phones and tablets
+          normalizeScroll: false,
+        });
+        document.documentElement.classList.add('has-smoother');
+
+        // In-page links (#book, /#solution from the same page, Back to top).
+        const toTarget = (hash: string) => {
+          const el = hash === '#top' ? document.body : document.querySelector(hash);
+          if (!el || !smoother) return false;
+          smoother.scrollTo(el, true, 'top top');
+          history.replaceState(null, '', hash === '#top' ? location.pathname : hash);
+          return true;
+        };
+        document.addEventListener('click', (e) => {
+          const a = (e.target as Element).closest?.('a[href]') as HTMLAnchorElement | null;
+          if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+          const url = new URL(a.href, location.href);
+          if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+          if (toTarget(url.hash)) e.preventDefault();
+        });
+
+        // Arriving with a hash (e.g. /#book from the Work page).
+        if (location.hash) {
+          window.addEventListener('load', () => {
+            const el = document.querySelector(location.hash);
+            if (el) smoother!.scrollTo(el, false, 'top top');
+          });
+        }
+
+        // Keep scroll length right when content height changes (List/Grid toggle, images).
+        let t: number | undefined;
+        new ResizeObserver(() => {
+          clearTimeout(t);
+          t = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+        }).observe(document.getElementById('smooth-content')!);
+      }
+
+      /* ---------- Dot cursor (mouse/trackpad only) ---------- */
+      const dot = document.querySelector<HTMLElement>('.cursor-dot');
+      if (dot && finePointer) {
+        document.documentElement.classList.add('has-dot-cursor');
+        gsap.set(dot, { xPercent: -50, yPercent: -50 });
+        const dur = reduceMotion ? 0 : 0.18;
+        const moveX = gsap.quickTo(dot, 'x', { duration: dur, ease: 'power3.out' });
+        const moveY = gsap.quickTo(dot, 'y', { duration: dur, ease: 'power3.out' });
+
+        let shown = false;
+        window.addEventListener('pointermove', (e) => {
+          if (e.pointerType !== 'mouse') return;
+          if (!shown) { gsap.set(dot, { x: e.clientX, y: e.clientY }); dot.classList.add('is-visible'); shown = true; }
+          moveX(e.clientX);
+          moveY(e.clientY);
+        }, { passive: true });
+        document.addEventListener('mouseleave', () => { dot.classList.remove('is-visible'); shown = false; });
+
+        // Grow over anything clickable.
+        const interactive = 'a, button, [role="button"], label, summary, .work-row, .work-tile';
+        document.addEventListener('pointerover', (e) => {
+          if ((e.target as Element).closest?.(interactive)) dot.classList.add('is-hover');
+        });
+        document.addEventListener('pointerout', (e) => {
+          const to = e.relatedTarget as Element | null;
+          if (!to || !to.closest?.(interactive)) dot.classList.remove('is-hover');
+        });
+        window.addEventListener('pointerdown', () => dot.classList.add('is-down'));
+        window.addEventListener('pointerup', () => dot.classList.remove('is-down'));
+      }
+    </script>
   </body>
 </html>

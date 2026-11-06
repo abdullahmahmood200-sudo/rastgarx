@@ -22,8 +22,8 @@ export const site = {
   // Hero visual. Put a file in /public (e.g. public/hero.jpg) and set its path
   // here, e.g. '/hero.jpg'. A .mp4/.webm path plays as a muted looping video.
   // Leave null to show the plain gradient panel.
-  hero: null as string | null,
-  heroAlt: 'Rastup showreel',
+  hero: '/hero.webp' as string | null,
+  heroAlt: 'A dark, minimal desk at night: a laptop, a coffee and a phone lighting up with an incoming call under a green neon light',
 
   // Demo call recording. Put an audio file in /public (e.g. public/demo-call.mp3)
   // and set its path here. With null, the player runs a silent 83-second
