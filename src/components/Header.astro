@@ -38,55 +38,48 @@ const {
   const btn = header?.querySelector<HTMLButtonElement>('[data-menu-btn]');
   const root = document.documentElement;
 
-  /* ---------- Phone bar: fixed, hides on scroll down, returns on scroll up ----------
-     The header sits inside the smooth-scroll content, which can be transformed,
-     so on phones it is moved into a fixed shell at body level (with its rule),
-     and a spacer keeps its place in the page. */
-  const mq = window.matchMedia('(max-width: 900px)');
+  /* ---------- Top bar: fixed, hides on scroll down, returns on scroll up ----------
+     The header sits inside the smooth-scroll content, which is transformed,
+     so it is moved into a fixed, see-through shell at body level, and a
+     spacer keeps its place in the page (the divider line stays in the page). */
+  const mq = window.matchMedia('(max-width: 900px)');   // phone menu
   const shell = document.createElement('div');
   shell.className = 'header-shell';
   const spacer = document.createElement('div');
   spacer.className = 'header-spacer';
   spacer.setAttribute('aria-hidden', 'true');
-  // The page's divider under the header (scripts may sit between them).
-  let rule: HTMLElement | null = null;
-  for (let el = header?.nextElementSibling; el; el = el.nextElementSibling) {
-    if (el.classList.contains('rule')) { rule = el as HTMLElement; break; }
-    if (el.tagName !== 'SCRIPT') break;
+  if (header) {
+    header.before(spacer);
+    shell.append(header);
+    document.body.prepend(shell);
+
+    // Spacer = bar height minus the page's own top padding, kept in sync on resize.
+    const size = () => {
+      if (shell.classList.contains('is-open')) return;
+      const pad = parseFloat(getComputedStyle(spacer.parentElement!).paddingTop) || 0;
+      spacer.style.height = Math.max(0, shell.offsetHeight - pad) + 'px';
+    };
+    size();
+    new ResizeObserver(size).observe(shell);
   }
 
-  const mount = () => {
-    if (!header) return;
-    if (mq.matches && header.parentElement !== shell) {
-      header.before(spacer);
-      shell.append(header);
-      if (rule) shell.append(rule);
-      document.body.prepend(shell);
-    } else if (!mq.matches && header.parentElement === shell) {
-      spacer.after(header);
-      if (rule) header.after(rule);
-      spacer.remove();
-      shell.remove();
-      shell.classList.remove('is-hidden');
-    }
-  };
-  mount();
-  mq.addEventListener('change', mount);
-
+  // Hide after a deliberate scroll down, show after a deliberate scroll up,
+  // so small wobbles never make the bar twitch.
   let lastY = window.scrollY;
+  let travel = 0;            // distance moved in the current direction
   let ticking = false;
   const onScroll = () => {
     ticking = false;
     const y = Math.max(0, window.scrollY);
     const dy = y - lastY;
-    if (Math.abs(dy) < 6 && y > 0) return;          // ignore jitter
-    if (!header?.classList.contains('is-open')) {
-      if (y <= shell.offsetHeight) shell.classList.remove('is-hidden');
-      else if (dy > 0) shell.classList.add('is-hidden');  // scrolling down
-      else shell.classList.remove('is-hidden');           // scrolling up
-    }
-    shell.classList.toggle('is-scrolled', y > 0);
     lastY = y;
+    shell.classList.toggle('is-scrolled', y > 0);
+    if (header?.classList.contains('is-open')) return;
+    if (y <= shell.offsetHeight) { shell.classList.remove('is-hidden'); travel = 0; return; }
+    if (dy === 0) return;
+    travel = Math.sign(dy) === Math.sign(travel) ? travel + dy : dy;
+    if (travel > 24) shell.classList.add('is-hidden');           // scrolling down
+    else if (travel < -12) shell.classList.remove('is-hidden');  // scrolling up
   };
   window.addEventListener('scroll', () => {
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }

@@ -459,9 +459,14 @@ img, video { display: block; max-width: 100%; }
   will-change: transform;
 }
 .cursor-dot.is-visible { opacity: 1; }
-.cursor-dot.is-hover { width: 36px; height: 36px; }
 .cursor-dot.is-down { width: 8px; height: 8px; }
-.cursor-dot.is-hover.is-down { width: 28px; height: 28px; }
+/* Over anything clickable: a 44px circle with the "go" arrow. */
+.cursor-dot { display: flex; align-items: center; justify-content: center; color: var(--on-accent); }
+.cursor-arrow { flex: none; opacity: 0; transform: scale(.4) rotate(-45deg); transition: opacity .2s ease, transform .3s cubic-bezier(.2, .8, .2, 1); }
+.cursor-dot.is-hover { width: 44px; height: 44px; mix-blend-mode: normal; box-shadow: 0 6px 24px rgba(0, 0, 0, .35); }
+.cursor-dot.is-hover .cursor-arrow { opacity: 1; transform: none; }
+.cursor-dot.is-hover.on-accent { background: var(--bg-deep); color: var(--accent); }
+.cursor-dot.is-hover.is-down { width: 38px; height: 38px; }
 html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
 @media (hover: none), (pointer: coarse) { .cursor-dot { display: none; } }
 
@@ -545,16 +550,27 @@ html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
 .footer-acc { display: none; }
 .header-shell, .header-spacer { display: none; }
 
+/* Fixed top bar on every screen: hides on scroll down, returns on scroll up.
+   The script moves the header (and its rule) in here; the spacer keeps its place. */
+.header-shell {
+  display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding: var(--gutter) var(--gutter) 0; background: transparent;
+  pointer-events: none; /* only the logo, nav and button take clicks */
+  will-change: transform;
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1), opacity .45s ease, background-color .3s ease;
+}
+.header-shell .header > * { pointer-events: auto; }
+.header-shell.is-hidden {
+  transform: translateY(calc(-100% - 20px)); opacity: 0;
+  transition: transform .5s cubic-bezier(.55, 0, .45, 1), opacity .35s ease .1s, background-color .3s ease;
+}
+.header-spacer { display: block; }
+.wrap > .header-spacer ~ .rule { margin-top: 40px; }
+
 @media (max-width: 900px) {
   /* Fixed top bar: 28px above the 42px row, rule 24px below = 94px tall. */
-  .header-shell {
-    display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    padding: 28px var(--gutter) 0; background: var(--bg);
-    transition: transform .35s cubic-bezier(.4, 0, .2, 1), background-color .3s ease;
-  }
-  .header-shell.is-hidden { transform: translateY(-100%); }
-  .header-shell > .rule { margin-top: 24px; }
-  .header-spacer { display: block; height: calc(94px - var(--gutter)); }
+  .header-shell { padding-top: 28px; }
+  .wrap > .header-spacer ~ .rule { margin-top: 24px; }
 
   .header { position: static; height: 42px; }
   .brand { gap: 10px; }
@@ -568,7 +584,7 @@ html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
   .round { width: 42px; height: 42px; }
 
   /* Full-screen menu: big links bottom-left */
-  .header-shell.is-open { height: 100vh; height: 100dvh; background: var(--bg-deep); }
+  .header-shell.is-open { height: 100vh; height: 100dvh; background: var(--bg-deep); pointer-events: auto; }
   .nav {
     position: absolute; top: auto; left: 0; right: 0; bottom: 0; z-index: 1;
     padding: 0 var(--gutter) 40px 28px; gap: 0; border-radius: 0; background: none; box-shadow: none;

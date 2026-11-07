@@ -35,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <!-- Fixed-position things live outside the smooth-scroll wrapper. -->
-    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"><svg class="cursor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg></div>
 
     <!-- Page transition: the destination's name decodes over a dark screen. -->
     <div class="pt" aria-hidden="true" data-pt>
@@ -136,12 +136,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
         // Grow over anything clickable.
         const interactive = 'a, button, [role="button"], label, summary, .work-row, .work-tile';
+        // Over a green button the circle turns dark so it still stands out.
+        const isGreen = (el: Element) => {
+          for (let n: Element | null = el; n && n !== document.body; n = n.parentElement) {
+            const bg = getComputedStyle(n).backgroundColor;
+            if (bg === 'rgb(31, 255, 0)') return true;
+            if (bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return false;
+          }
+          return false;
+        };
         document.addEventListener('pointerover', (e) => {
-          if ((e.target as Element).closest?.(interactive)) dot.classList.add('is-hover');
+          const hit = (e.target as Element).closest?.(interactive);
+          if (!hit) return;
+          dot.classList.add('is-hover');
+          dot.classList.toggle('on-accent', isGreen(e.target as Element));
         });
         document.addEventListener('pointerout', (e) => {
           const to = e.relatedTarget as Element | null;
-          if (!to || !to.closest?.(interactive)) dot.classList.remove('is-hover');
+          if (!to || !to.closest?.(interactive)) dot.classList.remove('is-hover', 'on-accent');
         });
         window.addEventListener('pointerdown', () => dot.classList.add('is-down'));
         window.addEventListener('pointerup', () => dot.classList.remove('is-down'));
