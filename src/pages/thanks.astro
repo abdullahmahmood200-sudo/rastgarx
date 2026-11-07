@@ -1,0 +1,32 @@
+---
+// Shown after the contact form is sent without JavaScript.
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+import { site, mailHref, telHref } from '../data/site';
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/#book', label: 'CAREER' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title="Thanks | Rastup" description="Your answers reached Rastup. We reply within one working day.">
+  <meta slot="head" name="robots" content="noindex" />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/contact" />
+      <div class="rule"></div>
+      <main>
+        <section class="contact-done">
+          <span class="tag-accent">RECEIVED</span>
+          <h1 class="h-center">Thanks, we’ll be in touch within one working day<span class="dot">.</span></h1>
+          <p class="muted">Want to talk sooner? Call <a href={telHref}>{site.phone}</a> or email <a href={mailHref}>{site.email}</a>.</p>
+          <a class="cta" href="/">BACK TO HOME</a>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>

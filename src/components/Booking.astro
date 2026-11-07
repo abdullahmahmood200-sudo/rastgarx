@@ -10,7 +10,7 @@ const slots = [1, 2, 3, 4, 5].map((n) => ({ num: '0' + n, open: n > 5 - open }))
   <p class="muted">Book your free call today and see how a rebuilt site and fresh ad creatives can transform your funnel.</p>
   <div class="slots">
     {slots.map((s) => s.open ? (
-      <a class="slot is-open lift" href="#contact" aria-label={`Slot ${s.num} available, book a free call`}>
+      <a class="slot is-open lift" href="/contact" aria-label={`Slot ${s.num} available, book a free call`}>
         <span class="slot-num">SLOT<br />{s.num}</span>
         <span class="slot-badge">
           <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-3 7-7 0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-2 2-5 5-5 8 0 4 3 7 7 7z"></path></svg>
@@ -25,5 +25,5 @@ const slots = [1, 2, 3, 4, 5].map((n) => ({ num: '0' + n, open: n > 5 - open }))
       </div>
     ))}
   </div>
-  <a class="cta" href="#contact">BOOK A FREE CALL</a>
+  <a class="cta" href="/contact">BOOK A FREE CALL</a>
 </section>

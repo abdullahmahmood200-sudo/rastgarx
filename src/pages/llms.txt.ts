@@ -29,6 +29,7 @@ ${site.name} is a website development, web design and digital marketing agency b
 
 - [Home](${url('/')})
 - [Work](${url('/work')}): selected projects and case studies
+- [Contact](${url('/contact')}): tell us about your business, revenue and goals
 - [Locations](${url('/locations')}): cities served across Pakistan
 - [Privacy Policy](${url('/privacy')})
 - [Terms of Service](${url('/terms')})

@@ -1,0 +1,248 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+import Arrow from '../components/Arrow.astro';
+import { site, mailHref, telHref } from '../data/site';
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/#book', label: 'CAREER' },
+  { href: '/contact', label: 'CONTACT', current: true },
+];
+
+const industries = [
+  'Real estate', 'Clinics & healthcare', 'Restaurants & cafes', 'E-commerce & retail',
+  'Education & training', 'Home services', 'Beauty & wellness', 'Professional services',
+  'Automotive', 'Hospitality & travel', 'Other',
+];
+const revenue = ['Pre-revenue', 'Under PKR 500K', 'PKR 500K to 2M', 'PKR 2M to 10M', 'PKR 10M to 50M', 'PKR 50M+'];
+const adSpend = ['Nothing yet', 'Under PKR 100K', 'PKR 100K to 500K', 'PKR 500K to 2M', 'PKR 2M+'];
+const goals = ['Steady growth', '2x in 12 months', '3x in 12 months', '5x or more', 'Not sure yet'];
+const leads = ['Walk-ins & referrals', 'Social media', 'Google search', 'Paid ads', 'Phone & WhatsApp', 'Marketplaces'];
+const services = ['High-converting website', 'Ad creatives', 'AI voice operator', 'The full growth system'];
+
+---
+<Base title="Contact | Rastup" description="Tell Rastup about your business, your revenue and your goals. We reply within one working day with a plan for your website, ads and AI voice operator.">
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="#form" />
+      <div class="rule"></div>
+
+      <main>
+        <section class="info contact-intro">
+          <div class="info-cols">
+            <div class="info-col">
+              <span>Studio</span>
+              <span><span class="accent">&gt;</span> {site.city}, {site.country}</span>
+            </div>
+            <div class="info-col">
+              <span>Response time</span>
+              <span><span class="accent">&gt;</span> Within 1 working day</span>
+            </div>
+            <div class="info-col">
+              <span class="intake"><span class="led" aria-hidden="true"></span>{site.openSlots} of 5 slots open</span>
+            </div>
+          </div>
+          <p class="lede contact-pitch">A few questions about your business, your revenue and where your customers come from. It takes about two minutes and tells us exactly where to start on the call.</p>
+        </section>
+
+        <section class="contact-head">
+          <p class="eyebrow">(Get in touch)</p>
+          <h1 class="display">Let’s grow your revenue<span class="dot">.</span></h1>
+        </section>
+
+        <form
+          id="form"
+          class="contact-form"
+          name="contact"
+          method="POST"
+          action="/thanks"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          data-contact-form
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="visually-hidden" aria-hidden="true">
+            <label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <fieldset class="cf-step">
+            <legend class="cf-legend"><span class="cf-num">(01)</span><span>Your details</span></legend>
+            <div class="cf-body cf-grid">
+              <label class="cf-field">
+                <span class="cf-label">Full name<b aria-hidden="true">*</b></span>
+                <input name="name" type="text" autocomplete="name" required placeholder="Ayesha Khan" />
+              </label>
+              <label class="cf-field">
+                <span class="cf-label">Business name<b aria-hidden="true">*</b></span>
+                <input name="business" type="text" autocomplete="organization" required placeholder="Khan Dental Studio" />
+              </label>
+              <label class="cf-field">
+                <span class="cf-label">Email<b aria-hidden="true">*</b></span>
+                <input name="email" type="email" autocomplete="email" required placeholder="you@business.com" />
+              </label>
+              <label class="cf-field">
+                <span class="cf-label">Phone / WhatsApp<b aria-hidden="true">*</b></span>
+                <input name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+92 300 1234567" pattern="[0-9 +\(\)\-]{7,}" title="Digits, spaces and + ( ) - only" />
+              </label>
+              <label class="cf-field">
+                <span class="cf-label">City</span>
+                <input name="city" type="text" autocomplete="address-level2" placeholder="Lahore" />
+              </label>
+              <label class="cf-field">
+                <span class="cf-label">Website or Instagram</span>
+                <input name="website" type="text" autocomplete="url" placeholder="business.com or @handle" />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="cf-step">
+            <legend class="cf-legend"><span class="cf-num">(02)</span><span>Your industry</span></legend>
+            <div class="cf-body">
+              <div class="cf-chips" role="radiogroup" aria-label="Industry">
+                {industries.map((v, i) => (
+                  <label class="chip"><input type="radio" name="industry" value={v} required={i === 0} /><span>{v}</span></label>
+                ))}
+              </div>
+              <label class="cf-field cf-other" data-other hidden>
+                <span class="cf-label">Tell us your industry</span>
+                <input name="industry_other" type="text" placeholder="e.g. Solar installation" />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="cf-step">
+            <legend class="cf-legend"><span class="cf-num">(03)</span><span>Revenue &amp; growth</span></legend>
+            <div class="cf-body cf-questions">
+              <div class="cf-q">
+                <p class="cf-label" id="q-revenue">What is your average monthly revenue?<b aria-hidden="true">*</b></p>
+                <div class="cf-chips" role="radiogroup" aria-labelledby="q-revenue">
+                  {revenue.map((v, i) => (
+                    <label class="chip"><input type="radio" name="monthly_revenue" value={v} required={i === 0} /><span>{v}</span></label>
+                  ))}
+                </div>
+              </div>
+              <div class="cf-q">
+                <p class="cf-label" id="q-ads">How much do you spend on ads each month?<b aria-hidden="true">*</b></p>
+                <div class="cf-chips" role="radiogroup" aria-labelledby="q-ads">
+                  {adSpend.map((v, i) => (
+                    <label class="chip"><input type="radio" name="monthly_ad_spend" value={v} required={i === 0} /><span>{v}</span></label>
+                  ))}
+                </div>
+              </div>
+              <div class="cf-q">
+                <p class="cf-label" id="q-goal">What revenue growth are you aiming for?<b aria-hidden="true">*</b></p>
+                <div class="cf-chips" role="radiogroup" aria-labelledby="q-goal">
+                  {goals.map((v, i) => (
+                    <label class="chip"><input type="radio" name="revenue_goal" value={v} required={i === 0} /><span>{v}</span></label>
+                  ))}
+                </div>
+              </div>
+              <div class="cf-q">
+                <p class="cf-label" id="q-leads">Where do most of your customers come from today?</p>
+                <div class="cf-chips" role="group" aria-labelledby="q-leads">
+                  {leads.map((v) => (
+                    <label class="chip"><input type="checkbox" name="lead_sources" value={v} /><span>{v}</span></label>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="cf-step">
+            <legend class="cf-legend"><span class="cf-num">(04)</span><span>Your project</span></legend>
+            <div class="cf-body cf-questions">
+              <div class="cf-q">
+                <p class="cf-label" id="q-services">What can we help with?</p>
+                <div class="cf-chips" role="group" aria-labelledby="q-services">
+                  {services.map((v) => (
+                    <label class="chip"><input type="checkbox" name="services" value={v} /><span>{v}</span></label>
+                  ))}
+                </div>
+              </div>
+              <label class="cf-field">
+                <span class="cf-label">What is holding your revenue back right now?</span>
+                <textarea name="message" rows="4" placeholder="Slow website, ads that don't convert, missed calls after hours…"></textarea>
+              </label>
+              <div class="cf-submit">
+                <button class="cta" type="submit" data-submit>SEND MY ANSWERS <Arrow /></button>
+                <p class="muted cf-note">By sending this you agree to our <a href="/privacy">Privacy Policy</a>. We never share your details.</p>
+              </div>
+              <p class="cf-status" role="status" aria-live="polite" data-status></p>
+            </div>
+          </fieldset>
+        </form>
+
+        <section class="contact-done" data-done hidden tabindex="-1">
+          <span class="tag-accent">RECEIVED</span>
+          <h2 class="h-center">Thanks, we’ll be in touch within one working day<span class="dot">.</span></h2>
+          <p class="muted">Want to talk sooner? Call <a href={telHref}>{site.phone}</a> or email <a href={mailHref}>{site.email}</a>.</p>
+        </section>
+
+        <section class="contact-direct">
+          <p class="eyebrow">(Prefer to talk?)</p>
+          <div class="contact-direct-row">
+            <a class="contact-direct-link" href={mailHref}><span class="muted">Email</span><span>{site.email}</span><Arrow /></a>
+            <a class="contact-direct-link" href={telHref}><span class="muted">Phone / WhatsApp</span><span>{site.phone}</span><Arrow /></a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>
+
+<script>
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const done = document.querySelector<HTMLElement>('[data-done]');
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+  const submit = form?.querySelector<HTMLButtonElement>('[data-submit]');
+  const other = form?.querySelector<HTMLElement>('[data-other]');
+
+  if (form && done && status && submit) {
+    // Show the free-text box only when "Other" is picked.
+    form.querySelectorAll<HTMLInputElement>('input[name="industry"]').forEach((r) =>
+      r.addEventListener('change', () => {
+        const on = r.checked && r.value === 'Other';
+        if (other) {
+          other.hidden = !on;
+          other.querySelector('input')!.required = on;
+        }
+      })
+    );
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      submit.disabled = true;
+      status.textContent = 'Sending…';
+      status.classList.remove('is-error');
+      try {
+        const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        done.hidden = false;
+        done.focus({ preventScroll: true });
+        // The page got shorter: re-measure, then bring the thank-you note into view.
+        ScrollTrigger.refresh();
+        const smoother = ScrollSmoother.get();
+        if (smoother) smoother.scrollTo(done, false, 'center center');
+        else done.scrollIntoView({ block: 'center' });
+      } catch {
+        status.textContent = 'That didn’t go through. Please try again, or email us directly.';
+        status.classList.add('is-error');
+        submit.disabled = false;
+      }
+    });
+  }
+</script>
