@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import Logo from '../components/Logo.astro';
 
 interface Props { title?: string; description?: string }
 const { title = site.title, description = site.description } = Astro.props;
@@ -24,10 +25,35 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={site.name} />
     <slot name="head" />
+    <!-- Arriving from a page transition: keep the overlay up from the first paint. -->
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem('rastup-pt') && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+          document.documentElement.classList.add('pt-in');
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <!-- Fixed-position things live outside the smooth-scroll wrapper. -->
     <div class="cursor-dot" aria-hidden="true"></div>
+
+    <!-- Page transition: the destination's name decodes over a dark screen. -->
+    <div class="pt" aria-hidden="true" data-pt>
+      <div class="pt-inner">
+        <Logo size={44} />
+        <span class="pt-word" data-pt-word></span>
+        <span class="pt-route" data-pt-route></span>
+      </div>
+    </div>
+    <script is:inline>
+      try {
+        var pt = JSON.parse(sessionStorage.getItem('rastup-pt') || 'null');
+        if (pt) {
+          document.querySelector('[data-pt-word]').textContent = pt.word;
+          document.querySelector('[data-pt-route]').textContent = pt.route;
+        }
+      } catch (e) {}
+    </script>
 
     <div id="smooth-wrapper">
       <div id="smooth-content">
@@ -119,6 +145,80 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         });
         window.addEventListener('pointerdown', () => dot.classList.add('is-down'));
         window.addEventListener('pointerup', () => dot.classList.remove('is-down'));
+      }
+    </script>
+
+    <script>
+      /* ---------- Page transition: text decode ---------- */
+      const KEY = 'rastup-pt';
+      const root = document.documentElement;
+      const overlay = document.querySelector<HTMLElement>('[data-pt]');
+      const wordEl = document.querySelector<HTMLElement>('[data-pt-word]');
+      const routeEl = document.querySelector<HTMLElement>('[data-pt-route]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const GLYPHS = '#%&@$01<>/\\=+*ABCDEFXYZ';
+
+      // "/locations/rahim-yar-khan/" -> "RAHIM YAR KHAN", "/" -> "HOME"
+      const labelFor = (path: string) => {
+        const segs = path.split('/').filter(Boolean);
+        if (!segs.length) return 'HOME';
+        return decodeURIComponent(segs[segs.length - 1]).replace(/-/g, ' ').toUpperCase();
+      };
+
+      // Scramble the word, locking letters in from left to right.
+      const decode = (el: HTMLElement, word: string, duration: number) => {
+        const start = performance.now();
+        const frame = (now: number) => {
+          const p = Math.min(1, (now - start) / duration);
+          const locked = Math.floor(p * word.length);
+          let out = '';
+          for (let i = 0; i < word.length; i++) {
+            out += i < locked || word[i] === ' ' ? word[i] : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+          }
+          el.textContent = out;
+          if (p < 1) requestAnimationFrame(frame);
+        };
+        frame(start); // draw the first scrambled frame now, not a frame later
+      };
+
+      const store = (v: object | null) => {
+        try { v ? sessionStorage.setItem(KEY, JSON.stringify(v)) : sessionStorage.removeItem(KEY); } catch {}
+      };
+
+      // Arriving: the overlay is already showing the resolved name. Reveal the page.
+      if (root.classList.contains('pt-in')) {
+        store(null);
+        setTimeout(() => root.classList.remove('pt-in'), 160);
+      } else {
+        store(null);
+      }
+
+      // Leaving: intercept links to other pages on this site.
+      if (overlay && wordEl && routeEl && !reduce) {
+        document.addEventListener('click', (e) => {
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          const a = (e.target as Element).closest?.('a[href]') as HTMLAnchorElement | null;
+          if (!a || a.hasAttribute('download') || (a.target && a.target !== '_self')) return;
+          const url = new URL(a.href, location.href);
+          if (url.origin !== location.origin) return;
+          if (url.pathname === location.pathname) return;            // same page (hash links)
+          if (/\.[a-z0-9]+$/i.test(url.pathname)) return;            // files: sitemap.xml, llms.txt
+          e.preventDefault();
+
+          const word = labelFor(url.pathname);
+          const route = url.pathname.replace(/\/$/, '') || '/';
+          routeEl.textContent = route;
+          wordEl.textContent = '';
+          overlay.classList.add('is-on');
+          decode(wordEl, word, 460);
+          store({ word, route });
+          setTimeout(() => { location.href = url.href; }, 540);
+        });
+
+        // Back/forward from the browser cache: never leave the overlay stuck on.
+        window.addEventListener('pageshow', (e) => {
+          if (e.persisted) { overlay.classList.remove('is-on'); root.classList.remove('pt-in'); store(null); }
+        });
       }
     </script>
   </body>

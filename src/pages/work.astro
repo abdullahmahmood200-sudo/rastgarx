@@ -120,7 +120,8 @@ const links = [
     buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.view!)));
     let saved: string | null = null;
     try { saved = localStorage.getItem('rastup-work-view'); } catch {}
-    if (saved === 'grid') show('grid');
+    // Phones open on the image tiles unless the visitor picked List before.
+    if (saved === 'grid' || (!saved && window.matchMedia('(max-width: 560px)').matches)) show('grid');
   }
 
   // Hover preview in the list view (mouse/trackpad only).

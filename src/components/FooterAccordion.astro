@@ -1,0 +1,43 @@
+---
+// Phone-only footer: one row per group that opens in place.
+import Arrow from './Arrow.astro';
+import { site, telHref, mailHref } from '../data/site';
+import { cities, cityHref } from '../data/cities';
+---
+<div class="footer-acc">
+  <details>
+    <summary>ABOUT<i aria-hidden="true"></i></summary>
+    <div class="footer-acc-body">
+      <p>Rastup builds animated, high-converting websites, ready-to-run ad creatives and AI voice operators, one growth system, serving businesses nationwide.</p>
+      <p class="footer-motto">We build.<br /><span class="accent">You profit.</span></p>
+    </div>
+  </details>
+  <details>
+    <summary>STUDIO<i aria-hidden="true"></i></summary>
+    <div class="footer-acc-body"><span>{site.city}<br />{site.country}</span></div>
+  </details>
+  <details>
+    <summary>CONTACT<i aria-hidden="true"></i></summary>
+    <div class="footer-acc-body"><a href={mailHref}>{site.email}</a><a href={telHref}>{site.phone}</a></div>
+  </details>
+  <details>
+    <summary>EXPLORE<i aria-hidden="true"></i></summary>
+    <div class="footer-acc-body">
+      <a href="/#work">Services</a>
+      <a href="/work">Our Work</a>
+      <a href="/#demo">Hear a Demo Call</a>
+      <a class="footer-acc-cta" href="/#book">Book a free call <Arrow /></a>
+    </div>
+  </details>
+  <details>
+    <summary>LOCATIONS<i aria-hidden="true"></i></summary>
+    <div class="footer-acc-body footer-acc-cities">
+      <a class="footer-label" href="/locations">All cities</a>
+      {cities.map((c) => <a href={cityHref(c)}>{c.name}</a>)}
+    </div>
+  </details>
+  <details>
+    <summary>LEGAL<i aria-hidden="true"></i></summary>
+    <div class="footer-acc-body"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
+  </details>
+</div>

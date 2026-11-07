@@ -26,8 +26,8 @@ const {
       {links.map((l) => <a href={l.href} class:list={{ 'is-current': l.current }} aria-current={l.current ? 'page' : undefined}>{l.label}</a>)}
     </nav>
     <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu" data-menu-btn>
-      <svg class="i-open" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg>
-      <svg class="i-close" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      <svg class="i-open" aria-hidden="true" width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h28M0 10h28M0 19h28"></path></svg>
+      <svg class="i-close" aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l20 20M21 1L1 21"></path></svg>
     </button>
     <a class="round" href={bookHref} aria-label="Book a free call"><Arrow size={20} stroke={2.2} /></a>
   </div>
@@ -36,9 +36,68 @@ const {
 <script>
   const header = document.querySelector<HTMLElement>('[data-header]');
   const btn = header?.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  const root = document.documentElement;
+
+  /* ---------- Phone bar: fixed, hides on scroll down, returns on scroll up ----------
+     The header sits inside the smooth-scroll content, which can be transformed,
+     so on phones it is moved into a fixed shell at body level (with its rule),
+     and a spacer keeps its place in the page. */
+  const mq = window.matchMedia('(max-width: 900px)');
+  const shell = document.createElement('div');
+  shell.className = 'header-shell';
+  const spacer = document.createElement('div');
+  spacer.className = 'header-spacer';
+  spacer.setAttribute('aria-hidden', 'true');
+  // The page's divider under the header (scripts may sit between them).
+  let rule: HTMLElement | null = null;
+  for (let el = header?.nextElementSibling; el; el = el.nextElementSibling) {
+    if (el.classList.contains('rule')) { rule = el as HTMLElement; break; }
+    if (el.tagName !== 'SCRIPT') break;
+  }
+
+  const mount = () => {
+    if (!header) return;
+    if (mq.matches && header.parentElement !== shell) {
+      header.before(spacer);
+      shell.append(header);
+      if (rule) shell.append(rule);
+      document.body.prepend(shell);
+    } else if (!mq.matches && header.parentElement === shell) {
+      spacer.after(header);
+      if (rule) header.after(rule);
+      spacer.remove();
+      shell.remove();
+      shell.classList.remove('is-hidden');
+    }
+  };
+  mount();
+  mq.addEventListener('change', mount);
+
+  let lastY = window.scrollY;
+  let ticking = false;
+  const onScroll = () => {
+    ticking = false;
+    const y = Math.max(0, window.scrollY);
+    const dy = y - lastY;
+    if (Math.abs(dy) < 6 && y > 0) return;          // ignore jitter
+    if (!header?.classList.contains('is-open')) {
+      if (y <= shell.offsetHeight) shell.classList.remove('is-hidden');
+      else if (dy > 0) shell.classList.add('is-hidden');  // scrolling down
+      else shell.classList.remove('is-hidden');           // scrolling up
+    }
+    shell.classList.toggle('is-scrolled', y > 0);
+    lastY = y;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+
   if (header && btn) {
     const set = (open: boolean) => {
       header.classList.toggle('is-open', open);
+      shell.classList.toggle('is-open', open);
+      root.classList.toggle('menu-open', open && mq.matches);
+      if (open) shell.classList.remove('is-hidden');
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     };
@@ -48,5 +107,6 @@ const {
     document.addEventListener('click', (e) => {
       if (!header.contains(e.target as Node)) set(false);
     });
+    mq.addEventListener('change', () => set(false));
   }
 </script>

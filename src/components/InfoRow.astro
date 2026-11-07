@@ -1,5 +1,5 @@
 ---
-import { site, telHref, mailHref } from '../data/site';
+import { site } from '../data/site';
 
 // Rendered at build time so the page never shows an empty clock;
 // the script below keeps it live in the browser.
@@ -15,16 +15,12 @@ const date = now.toLocaleDateString('en-US', { timeZone: tz, month: 'long', day:
       <span>{site.city}, {site.country}</span>
       <span class="info-time">Local time
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
-        <time data-time>{time}</time></span>
-      <a href={site.mapsUrl} class="muted" style="margin-top: 4px" target="_blank" rel="noopener">Open Google Maps</a>
-    </div>
+        <time data-time>{time}</time></span>    </div>
     <div class="info-col">
       <span data-weekday>{weekday}</span>
       <span data-date>{date}</span>
     </div>
     <div class="info-col">
-      <a href={telHref}>{site.phone}</a>
-      <a href={mailHref}>{site.email}</a>
       <span class="intake"><span class="led" aria-hidden="true"></span>Closing intake soon</span>
     </div>
   </div>
