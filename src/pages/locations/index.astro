@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import FooterCompact from '../../components/FooterCompact.astro';
+import Arrow from '../../components/Arrow.astro';
+import { cities, cityHref } from '../../data/cities';
+import { site } from '../../data/site';
+import { businessSchema, breadcrumbSchema, graph } from '../../data/schema';
+
+const title = 'Website Development & Digital Marketing Agency in Pakistan | Rastup';
+const description = `Rastup builds websites, e-commerce stores, ad creatives and SEO for businesses in ${cities.length} cities across Pakistan, from Karachi and Lahore to Islamabad and Peshawar.`;
+
+const provinces = [...new Set(cities.map((c) => c.province))];
+const groups = provinces.map((p) => ({ province: p, list: cities.filter((c) => c.province === p) }));
+
+const base = Astro.site;
+const jsonLd = graph(
+  businessSchema(base, cities.map((c) => ({ '@type': 'City', name: c.name }))),
+  {
+    '@type': 'CollectionPage',
+    url: new URL('/locations', base).toString(),
+    name: title,
+    description,
+    hasPart: cities.map((c) => ({ '@type': 'WebPage', name: `Web design and digital marketing in ${c.name}`, url: new URL(cityHref(c), base).toString() })),
+  },
+  breadcrumbSchema(base, [
+    { name: 'Home', path: '/' },
+    { name: 'Locations', path: '/locations' },
+  ]),
+);
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/locations', label: 'LOCATIONS', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '#contact', label: 'CONTACT' },
+];
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main class="city">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Locations</span>
+        </nav>
+
+        <section class="city-hero">
+          <p class="eyebrow">(Locations)</p>
+          <h1 class="display city-title">Web design &amp; digital marketing across Pakistan<span class="dot">.</span></h1>
+          <div class="city-hero-row">
+            <p class="lede">Rastup is a website development and digital marketing agency based in {site.city}. We build animated websites, e-commerce stores, ad creatives and SEO for businesses in {cities.length} cities across Pakistan, working remotely by video call and WhatsApp.</p>
+            <a class="cta" href="/#book">BOOK A FREE CALL <Arrow /></a>
+          </div>
+        </section>
+
+        {groups.map((g) => (
+          <section class="city-section city-province">
+            <h2 class="city-label muted">{g.province}</h2>
+            <ul class="city-grid">
+              {g.list.map((c) => (
+                <li>
+                  <a class="city-card lift" href={cityHref(c)}>
+                    <span class="city-card-name">{c.name}</span>
+                    <span class="muted city-card-sub">Website development, ads &amp; SEO</span>
+                    <Arrow />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>

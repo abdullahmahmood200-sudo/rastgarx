@@ -22,6 +22,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <slot name="head" />
   </head>
   <body>
     <!-- Fixed-position things live outside the smooth-scroll wrapper. -->

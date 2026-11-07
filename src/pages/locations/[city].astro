@@ -1,0 +1,172 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import FooterCompact from '../../components/FooterCompact.astro';
+import Arrow from '../../components/Arrow.astro';
+import { cities, cityBySlug, cityHref, cityServices, type City } from '../../data/cities';
+import { site } from '../../data/site';
+import { businessSchema, breadcrumbSchema, faqSchema, graph } from '../../data/schema';
+
+export function getStaticPaths() {
+  return cities.map((c) => ({ params: { city: c.slug }, props: { city: c } }));
+}
+
+const { city } = Astro.props as { city: City };
+const n = city.name;
+const base = Astro.site;
+
+const title = `Website Development & Digital Marketing Agency in ${n} | Rastup`;
+const description = `Web design, website development, e-commerce, ads and SEO for businesses in ${n}, ${city.province}. Animated, high-converting websites from Rastup. Book a free call.`;
+
+const isHome = city.slug === 'islamabad';
+const howWeWork = isHome
+  ? `Our studio is in ${site.city}. Every project starts with a free call, and we keep you updated throughout by video call and WhatsApp.`
+  : `We work with ${n} businesses remotely from our studio in ${site.city}. Every project starts with a free call, and we keep you updated throughout by video call and WhatsApp, so you never need to travel.`;
+
+const faqs = [
+  {
+    q: `Do you build websites for businesses in ${n}?`,
+    a: `Yes. Rastup designs and develops websites for businesses in ${n}. ${howWeWork}`,
+  },
+  {
+    q: `How much does website development cost in ${n}?`,
+    a: `Every website is priced per project, based on the pages, features and animations it needs. After a free call we send a written proposal with a fixed price, timeline and the number of revision rounds. Projects start with a 50% deposit and the balance is due on delivery.`,
+  },
+  {
+    q: `Are you a digital marketing agency in ${n}?`,
+    a: `Yes. Alongside web design and development we create ad creatives for social media, posters and billboards, and we offer SEO so people searching in ${n} find you on Google and Google Maps.`,
+  },
+  {
+    q: `Can you build an e-commerce website for my ${n} store?`,
+    a: `Yes. We build online stores that make it easy for customers in ${n} and across Pakistan to browse products, order and pay, designed to look as good on a phone as on a laptop.`,
+  },
+  {
+    q: `What kinds of ${n} businesses do you work with?`,
+    a: `We work with businesses across ${n}, including ${city.industries.slice(0, -1).join(', ').toLowerCase()} and ${city.industries[city.industries.length - 1].toLowerCase()}. We take on only five new clients a year, so each one gets our full attention.`,
+  },
+  {
+    q: `How long does it take to build a website?`,
+    a: `It depends on the size of the site. The timeline is agreed up front in your written proposal, and we keep to it as long as content and feedback arrive on time.`,
+  },
+];
+
+const nearby = city.nearby.map((s) => cityBySlug[s]).filter(Boolean);
+
+const jsonLd = graph(
+  businessSchema(base, [{ '@type': 'City', name: n, containedInPlace: { '@type': 'AdministrativeArea', name: city.province } }]),
+  {
+    '@type': 'WebPage',
+    '@id': new URL(cityHref(city), base).toString(),
+    url: new URL(cityHref(city), base).toString(),
+    name: title,
+    description,
+    about: { '@id': new URL('/#business', base).toString() },
+  },
+  breadcrumbSchema(base, [
+    { name: 'Home', path: '/' },
+    { name: 'Locations', path: '/locations' },
+    { name: n, path: cityHref(city) },
+  ]),
+  faqSchema(faqs),
+);
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/locations', label: 'LOCATIONS', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '#contact', label: 'CONTACT' },
+];
+const fill = (s: string) => s.replaceAll('{city}', n);
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main class="city">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">/</span><a href="/locations">Locations</a><span aria-hidden="true">/</span><span aria-current="page">{n}</span>
+        </nav>
+
+        <section class="city-hero">
+          <p class="eyebrow">({city.province}, Pakistan)</p>
+          <h1 class="display city-title">Web design &amp; digital marketing in {n}<span class="dot">.</span></h1>
+          <div class="city-hero-row">
+            <p class="lede">{city.intro}</p>
+            <a class="cta" href="/#book">BOOK A FREE CALL <Arrow /></a>
+          </div>
+        </section>
+
+        <section class="city-section" aria-labelledby="services-h">
+          <span class="tag">WHAT WE DO IN {n.toUpperCase()}</span>
+          <h2 id="services-h" class="city-h2">Website development, ads and SEO for {n} businesses<span class="dot">.</span></h2>
+          <div class="city-services">
+            {cityServices.map((s, i) => (
+              <article class="city-service">
+                <span class="accent">({String(i + 1).padStart(2, '0')})</span>
+                <h3>{s.title}</h3>
+                <p>{fill(s.body)}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="city-section city-split" aria-labelledby="local-h">
+          <div>
+            <span class="tag">BUILT FOR {n.toUpperCase()}</span>
+            <h2 id="local-h" class="city-h2">Why {n} businesses need a better website<span class="dot">.</span></h2>
+          </div>
+          <div class="city-copy">
+            <p>{city.context}</p>
+            <p>{howWeWork}</p>
+            <p class="muted city-label">Industries we help in {n}</p>
+            <ul class="tags city-tags">{city.industries.map((ind) => <li class="tag-soft">{ind}</li>)}</ul>
+          </div>
+        </section>
+
+        <section class="city-section" aria-labelledby="process-h">
+          <span class="tag">HOW IT WORKS</span>
+          <h2 id="process-h" class="city-h2">From first call to launch<span class="dot">.</span></h2>
+          <ol class="city-steps">
+            <li><span class="accent">01</span><h3>Free call</h3><p>We learn about your business, your customers in {n} and what the website needs to achieve.</p></li>
+            <li><span class="accent">02</span><h3>Written proposal</h3><p>A fixed price, timeline and revision rounds, in writing, before any work starts.</p></li>
+            <li><span class="accent">03</span><h3>Design &amp; build</h3><p>We design, animate and develop the site, sharing progress with you along the way.</p></li>
+            <li><span class="accent">04</span><h3>Launch &amp; grow</h3><p>We launch, set up SEO and ad creatives, and keep improving what brings in customers.</p></li>
+          </ol>
+        </section>
+
+        <section class="city-section city-split" aria-labelledby="faq-h">
+          <div>
+            <span class="tag">FAQ</span>
+            <h2 id="faq-h" class="city-h2">Questions from {n} businesses<span class="dot">.</span></h2>
+          </div>
+          <div class="faq">
+            {faqs.map((f, i) => (
+              <details open={i === 0}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section class="city-section center-section city-cta">
+          <span class="tag">WORK WITH US</span>
+          <h2 class="h-center">Ready to grow your {n} business online<span class="dot">?</span></h2>
+          <a class="cta" href="/#book">BOOK A FREE CALL</a>
+        </section>
+
+        <section class="city-section city-nearby" aria-labelledby="nearby-h">
+          <h2 id="nearby-h" class="city-label muted">We also work with businesses in</h2>
+          <ul class="city-links">
+            {nearby.map((c) => <li><a href={cityHref(c)}>Web design in {c.name} <Arrow /></a></li>)}
+            <li><a href="/locations">All cities <Arrow /></a></li>
+          </ul>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>

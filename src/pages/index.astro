@@ -9,8 +9,16 @@ import Services from '../components/Services.astro';
 import DemoCall from '../components/DemoCall.astro';
 import Booking from '../components/Booking.astro';
 import Footer from '../components/Footer.astro';
+import { businessSchema, graph } from '../data/schema';
+import { site } from '../data/site';
+
+const jsonLd = graph(
+  businessSchema(Astro.site),
+  { '@type': 'WebSite', '@id': new URL('/#website', Astro.site).toString(), url: new URL('/', Astro.site).toString(), name: site.name, publisher: { '@id': new URL('/#business', Astro.site).toString() } },
+);
 ---
 <Base>
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
   <div id="top" class="page">
     <div class="wrap">
       <Header />
