@@ -1,0 +1,9 @@
+---
+import { cities, cityHref } from '../data/cities';
+---
+<nav class="footer-cities" aria-label="Cities we serve">
+  <a class="footer-label" href="/locations">WEB DESIGN &amp; MARKETING ACROSS PAKISTAN</a>
+  <ul>
+    {cities.map((c) => <li><a href={cityHref(c)}>{c.name}</a></li>)}
+  </ul>
+</nav>

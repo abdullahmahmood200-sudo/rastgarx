@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import Arrow from './Arrow.astro';
+import FooterCities from './FooterCities.astro';
 import { site, telHref, mailHref } from '../data/site';
 
 const year = new Date().getFullYear();
@@ -28,10 +29,10 @@ const year = new Date().getFullYear();
       <div>
         <span class="footer-label">EXPLORE</span>
         <span class="stack">
-          <a href="#industries">Industries</a>
+          <a href="/#work">Services</a>
+          <a href="/work">Our Work</a>
+          <a href="/#demo">Hear a Demo Call</a>
           <a href="/locations">Locations</a>
-          <a href="#international">International</a>
-          <a href="#who-we-help">Who We Help</a>
         </span>
       </div>
       <div>
@@ -40,10 +41,11 @@ const year = new Date().getFullYear();
       </div>
       <div>
         <span class="footer-label">GET STARTED</span>
-        <a class="footer-cta" href="#book">Book a free call <Arrow /></a>
+        <a class="footer-cta" href="/#book">Book a free call <Arrow /></a>
       </div>
     </div>
   </div>
+  <FooterCities />
   <div class="footer-bottom">
     <span>© {year} {site.name}<span class="footer-bottom-extra"> · {site.city}, {site.country} · {site.phone} · {site.email}</span></span>
     <a href="#top">Back to top ↑</a>

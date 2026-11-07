@@ -516,3 +516,11 @@ html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
   .city-copy { font-size: 17px; }
   .faq summary { font-size: 17px; }
 }
+
+/* Footer city links */
+.footer-cities { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 16px; font-size: 15px; }
+.footer-compact .footer-cities { margin-top: 0; }
+.footer-cities ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; }
+.footer-cities ul a { color: var(--muted); display: inline-block; padding: 4px 0; }
+.footer-cities ul a:hover, .footer-cities a.footer-label:hover { color: var(--ink); }
+@media (max-width: 560px) { .footer-cities { margin-top: 40px; } .footer-cities ul { gap: 6px 18px; } }
