@@ -49,7 +49,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         smoother = ScrollSmoother.create({
           wrapper: '#smooth-wrapper',
           content: '#smooth-content',
-          smooth: 1.1,          // seconds to "catch up" — higher is floatier
+          smooth: 1.1,          // seconds to "catch up", higher is floatier
           effects: true,        // enables data-speed / data-lag attributes
           smoothTouch: false,   // native scrolling on phones and tablets
           normalizeScroll: false,

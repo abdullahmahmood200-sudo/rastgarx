@@ -13,12 +13,12 @@ const { project: p, index } = Astro.props;
 const placeholderLabels = ['Homepage hero', 'Key page', 'Mobile screens', 'Details & motion'];
 const shots = p.gallery?.length
   ? p.gallery.map((s) => ({ ...s, look: null }))
-  : placeholderLabels.map((label, i) => ({ src: null, alt: `${p.name} — ${label}`, look: shotLooks[i] }));
+  : placeholderLabels.map((label, i) => ({ src: null, alt: `${p.name} | ${label}`, look: shotLooks[i] }));
 
 const next = projects[(index + 1) % projects.length];
 ---
 <Base
-  title={`${p.name} — ${p.services} | Rastup`}
+  title={`${p.name}, ${p.services} | Rastup`}
   description={p.description ?? `${p.name} (${p.category}): ${p.services} by Rastup, ${p.year}.`}
 >
   <div class="page case" id="top">

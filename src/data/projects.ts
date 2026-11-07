@@ -1,7 +1,7 @@
 // Projects shown on /work, in display order. Each one also gets its own
 // case-study page at /work/<slug> (e.g. /work/rawnaq).
 //
-// Optional fields — leave them out until you have the material:
+// Optional fields, leave them out until you have the material:
 //   description  Case-study paragraph. Hidden when missing.
 //   liveUrl      Shows a "VISIT LIVE SITE" button on the case study.
 //   cover        Image for the Work list preview and grid tile,

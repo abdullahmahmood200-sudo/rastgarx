@@ -2,9 +2,9 @@
 
 export const site = {
   name: 'Rastup',
-  title: 'Rastup — Animated websites, ads & AI voice operators',
+  title: 'Rastup | Animated websites, ads & AI voice operators',
   description:
-    'Rastup builds animated, high-converting websites, ready-to-run ad creatives and AI voice operators — one growth system for your business.',
+    'Rastup builds animated, high-converting websites, ready-to-run ad creatives and AI voice operators, one growth system for your business.',
 
   city: 'Islamabad',
   country: 'Pakistan',

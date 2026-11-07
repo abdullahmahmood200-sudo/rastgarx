@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import FooterCompact from './FooterCompact.astro';
+import { legal } from '../data/legal';
+
+interface Props { title: string; heading: string; description: string; current: 'privacy' | 'terms' }
+const { title, heading, description, current } = Astro.props;
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/privacy', label: 'PRIVACY', current: current === 'privacy' },
+  { href: '/terms', label: 'TERMS', current: current === 'terms' },
+];
+---
+<Base title={title} description={description}>
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main class="legal">
+        <header class="legal-head">
+          <p class="eyebrow">(Legal)</p>
+          <h1 class="display">{heading}<span class="dot">.</span></h1>
+          <p class="muted legal-date">Effective {legal.effectiveDate}</p>
+        </header>
+        <article class="legal-body">
+          <slot />
+        </article>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>

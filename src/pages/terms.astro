@@ -1,0 +1,73 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { site, mailHref, telHref } from '../data/site';
+import { legal } from '../data/legal';
+---
+<LegalPage
+  title="Terms of Service | Rastup"
+  heading="Terms of Service"
+  description="The terms that apply when you use the Rastup website or hire Rastup for websites, ad creatives or AI voice operators."
+  current="terms"
+>
+  <p class="lede">These terms apply when you use our website or hire {site.name} for a project or an ongoing service. By doing either, you agree to them.</p>
+
+  <h2>1. About us</h2>
+  <p>{site.name} is {legal.entity}. We build animated websites, ad creatives and AI voice operators for businesses. "{site.name}", "we" and "us" mean the business. "You" and "the client" mean the person or business using our website or services.</p>
+
+  <h2>2. Proposals and scope</h2>
+  <p>Every project starts with a written proposal that sets out the deliverables, timeline, price and the number of revision rounds included. Work outside that scope, or revisions beyond the included rounds, is quoted separately and starts only once you approve the quote. If these terms and a signed proposal disagree, the proposal wins for that project.</p>
+
+  <h2>3. Payment</h2>
+  <ul>
+    <li>Projects require a {legal.depositPercent}% deposit before work starts. The deposit is non-refundable once work has started.</li>
+    <li>The remaining {100 - legal.depositPercent}% is due on delivery, before launch or handover of final files and accounts.</li>
+    <li>If a payment is overdue, we may pause work and hold back launch or handover until it is paid.</li>
+  </ul>
+
+  <h2>4. Ongoing services</h2>
+  <p>Ongoing services, such as running an AI voice operator, are billed monthly in advance. You can cancel at any time by email. The service continues until the end of the current paid month and then stops. Fees already paid are not refunded for part of a month.</p>
+
+  <h2>5. Your responsibilities</h2>
+  <ul>
+    <li>Provide content, feedback, approvals and any access we need on time. Delays on your side may move the timeline.</li>
+    <li>Make sure you own or have permission to use everything you give us, such as text, images, logos and customer data.</li>
+    <li>Use what we build lawfully. For voice operators, this includes following the laws on calls and customer data where you operate, and telling your callers that they are speaking with an automated assistant where the law requires it.</li>
+    <li>Keep your own logins and accounts secure once they are handed over.</li>
+  </ul>
+
+  <h2>6. Ownership</h2>
+  <ul>
+    <li>Once you have paid in full, you own the final deliverables made for you, such as your website design, ad creatives and voice operator scripts.</li>
+    <li>Until full payment, all rights in the work stay with {site.name}.</li>
+    <li>We keep ownership of our own tools, code libraries, templates and know-how that existed before your project or are not specific to it, and you get a permanent licence to use them as part of your deliverables.</li>
+    <li>Third-party items such as fonts, stock media, plugins and platforms remain under their owners' licences.</li>
+    <li>We may show the finished work in our portfolio and marketing unless we agree otherwise in writing.</li>
+  </ul>
+
+  <h2>7. Third-party services</h2>
+  <p>Our work often runs on services we do not control, such as hosting, domain registrars, ad platforms, and telephony and speech providers. Their own terms apply, and we are not responsible for their outages, policy changes, fees or decisions (for example an ad platform rejecting an ad).</p>
+
+  <h2>8. Results</h2>
+  <p>We build every project to perform, but sales, leads, ad results and search rankings depend on many things outside our control. We do not guarantee any specific business result.</p>
+
+  <h2>9. Confidentiality</h2>
+  <p>We keep your non-public business information confidential and use it only to deliver your project. We ask you to do the same with our proposals, pricing and methods.</p>
+
+  <h2>10. Limitation of liability</h2>
+  <p>To the extent the law allows, {site.name} is not liable for indirect or consequential losses, such as lost profits, lost data or lost business. Our total liability for any claim is limited to the amount you paid us for the specific service the claim relates to.</p>
+
+  <h2>11. Ending a project</h2>
+  <p>Either side may end a project in writing if the other seriously breaches these terms or the proposal and does not fix it within a reasonable time. If a project ends early, you pay for the work completed up to that point, and the deposit is not refunded.</p>
+
+  <h2>12. Use of this website</h2>
+  <p>The content of this website, including its design, text and images, belongs to {site.name} or our clients and may not be copied without permission. Please do not misuse the site, for example by attempting to break into it or overload it.</p>
+
+  <h2>13. Governing law</h2>
+  <p>These terms are governed by {legal.governingLaw}. Any dispute will be settled by {legal.courts}.</p>
+
+  <h2>14. Changes to these terms</h2>
+  <p>We may update these terms from time to time. The version in force when you sign a proposal applies to that project. The effective date at the top of this page shows when they last changed.</p>
+
+  <h2>15. Contact</h2>
+  <p>{site.name}, {site.city}, {site.country}<br /><a href={mailHref}>{site.email}</a><br /><a href={telHref}>{site.phone}</a></p>
+</LegalPage>

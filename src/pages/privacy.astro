@@ -1,0 +1,73 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { site, mailHref, telHref } from '../data/site';
+import { legal } from '../data/legal';
+---
+<LegalPage
+  title="Privacy Policy | Rastup"
+  heading="Privacy Policy"
+  description="How Rastup collects, uses and protects personal information on its website and in its websites, ad creative and AI voice operator services."
+  current="privacy"
+>
+  <p class="lede">This policy explains what personal information {site.name} collects, why we collect it, and what choices you have. We keep it short because we collect very little.</p>
+
+  <h2>1. Who we are</h2>
+  <p>{site.name} is {legal.entity}. We build websites, ad creatives and AI voice operators for businesses. In this policy, "{site.name}", "we" and "us" mean the business, and "you" means anyone who visits our website, contacts us or works with us.</p>
+  <p>Questions about this policy go to <a href={mailHref}>{site.email}</a> or <a href={telHref}>{site.phone}</a>.</p>
+
+  <h2>2. Information we collect</h2>
+  <h3>When you visit this website</h3>
+  <ul>
+    <li>The website has no contact forms, no analytics, no advertising trackers and no cookies.</li>
+    <li>Our hosting provider automatically keeps standard server logs (such as IP address, browser type, the page requested and the time of the request) to deliver the site and protect it from abuse.</li>
+    <li>On the Work page, your choice of List or Grid view is saved in your own browser's local storage so the page remembers it. It never leaves your device and you can clear it at any time from your browser settings.</li>
+  </ul>
+  <h3>When you contact us or book a call</h3>
+  <p>If you email, phone or book a call with us, we receive what you choose to share: usually your name, email address, phone number, business name and details about your project.</p>
+  <h3>When you become a client</h3>
+  <p>To deliver a project we may receive content, brand materials, account access you grant us (for example to a domain, hosting or ad account) and billing details needed to invoice you.</p>
+
+  <h2>3. AI voice operators</h2>
+  <p>When we run an AI voice operator for a client business, we handle calls on that business's behalf. The business decides how the service is used and is responsible for its callers' information.</p>
+  <ul>
+    <li>During a call, the operator collects the caller's name, phone number and request (for example a booking or enquiry) and passes it to the client business.</li>
+    <li>We do not record calls and we do not store call recordings or transcripts.</li>
+    <li>Call audio is processed in real time by the telephony and speech technology providers needed to connect and answer the call.</li>
+    <li>If you called a business that uses one of our operators and have a question about your information, please contact that business first. We will help them respond.</li>
+  </ul>
+
+  <h2>4. How we use information</h2>
+  <ul>
+    <li>To reply to you and arrange calls.</li>
+    <li>To plan, build, deliver and support the services you hire us for.</li>
+    <li>To send invoices, keep business and tax records, and meet legal obligations.</li>
+    <li>To keep our website and systems secure.</li>
+  </ul>
+  <p>We do not sell personal information, and we do not use it for advertising profiles.</p>
+
+  <h2>5. Who we share it with</h2>
+  <ul>
+    <li>Service providers that help us run the business, such as website hosting, email, and telephony and speech technology for voice operators. They may only use the information to provide their service to us.</li>
+    <li>Our clients, where the information was collected for them (for example caller details from a voice operator).</li>
+    <li>Authorities or other parties when the law requires it, or to protect our rights, our clients or the public.</li>
+  </ul>
+  <p>Some of these providers operate outside Pakistan, so information may be processed in other countries.</p>
+
+  <h2>6. How long we keep it</h2>
+  <p>We keep correspondence and project records for as long as we work together and afterwards only as long as needed for accounting, tax and legal purposes. Caller details from voice operators are passed to the client business and are not kept by us beyond what is needed to deliver them.</p>
+
+  <h2>7. Security</h2>
+  <p>We use reasonable technical and organisational measures to protect personal information, and we limit access to what is needed to do the work. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
+
+  <h2>8. Your choices and rights</h2>
+  <p>You can ask us to tell you what personal information we hold about you, to correct it, or to delete it, and you can object to how we use it. Email <a href={mailHref}>{site.email}</a> and we will respond within a reasonable time. We may need to keep some records where the law requires it.</p>
+
+  <h2>9. Children</h2>
+  <p>Our services are for businesses. We do not knowingly collect personal information from children under 18.</p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>We may update this policy from time to time. The effective date at the top of this page shows when it last changed.</p>
+
+  <h2>11. Contact</h2>
+  <p>{site.name}, {site.city}, {site.country}<br /><a href={mailHref}>{site.email}</a><br /><a href={telHref}>{site.phone}</a></p>
+</LegalPage>
