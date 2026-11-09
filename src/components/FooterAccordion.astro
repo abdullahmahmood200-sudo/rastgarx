@@ -2,7 +2,6 @@
 // Phone-only footer: one row per group that opens in place.
 import Arrow from './Arrow.astro';
 import { site, telHref, mailHref } from '../data/site';
-import { cities, cityHref } from '../data/cities';
 ---
 <div class="footer-acc">
   <details>
@@ -25,16 +24,11 @@ import { cities, cityHref } from '../data/cities';
     <div class="footer-acc-body">
       <a href="/#work">Services</a>
       <a href="/work">Our Work</a>
+      <a href="/blog">Blog</a>
       <a href="/#demo">Hear a Demo Call</a>
+      <a href="/locations">Locations</a>
       <a href="/contact">Contact</a>
       <a class="footer-acc-cta" href="/contact">Book a free call <Arrow /></a>
-    </div>
-  </details>
-  <details>
-    <summary>LOCATIONS<i aria-hidden="true"></i></summary>
-    <div class="footer-acc-body footer-acc-cities">
-      <a class="footer-label" href="/locations">All cities</a>
-      {cities.map((c) => <a href={cityHref(c)}>{c.name}</a>)}
     </div>
   </details>
   <details>

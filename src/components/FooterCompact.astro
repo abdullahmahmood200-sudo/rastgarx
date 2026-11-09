@@ -1,6 +1,5 @@
 ---
 import Logo from './Logo.astro';
-import FooterCities from './FooterCities.astro';
 import FooterAccordion from './FooterAccordion.astro';
 import { site, telHref, mailHref } from '../data/site';
 const year = new Date().getFullYear();
@@ -15,10 +14,9 @@ const year = new Date().getFullYear();
     <div class="stack"><span class="footer-label">STUDIO</span><span>{site.city}, {site.country}</span></div>
     <p class="footer-motto">We build.<br /><span class="accent">You profit.</span></p>
   </div>
-  <FooterCities />
   <FooterAccordion />
   <div class="footer-bottom">
     <span>© {year} {site.name}</span>
-    <span class="footer-legal"><a href="/locations">Locations</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="#top">Back to top ↑</a></span>
+    <span class="footer-legal"><a href="/blog">Blog</a><a href="/locations">Locations</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="#top">Back to top ↑</a></span>
   </div>
 </footer>

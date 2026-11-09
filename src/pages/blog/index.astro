@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import FooterCompact from '../../components/FooterCompact.astro';
+import Arrow from '../../components/Arrow.astro';
+import { breadcrumbSchema, graph } from '../../data/schema';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+const formatDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+const title = 'Marketing Agency Blog: Websites, Ads, SEO & AI | Rastup';
+const description = 'Practical guides from Rastup, a marketing agency in Pakistan, on choosing an agency, websites that convert, advertising, SEO and AI voice operators.';
+const jsonLd = graph(
+  { '@type': 'Blog', '@id': new URL('/blog#blog', Astro.site).toString(), url: new URL('/blog', Astro.site).toString(), name: 'Rastup Blog', description, publisher: { '@id': new URL('/#business', Astro.site).toString() } },
+  breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }]),
+);
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/blog', label: 'BLOG', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+      <main class="blog">
+        <section class="blog-head">
+          <p class="eyebrow">(Rastup blog)</p>
+          <h1 class="display">Marketing that pays<span class="dot">.</span></h1>
+          <p class="lede">Plain guides on choosing a marketing agency, building websites that convert, advertising, SEO and AI voice operators.</p>
+        </section>
+        <section class="blog-list" aria-label="Articles">
+          {posts.map((post) => (
+            <a class="blog-row" href={`/blog/${post.id}`}>
+              <span class="blog-row-meta"><span>{post.data.category}</span><time datetime={post.data.published.toISOString().slice(0, 10)}>{formatDate(post.data.published)}</time></span>
+              <span class="blog-row-title">{post.data.title}<span class="dot">.</span></span>
+              <span class="blog-row-desc muted">{post.data.description}</span>
+              <span class="blog-row-more">READ THE GUIDE <Arrow /></span>
+            </a>
+          ))}
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>

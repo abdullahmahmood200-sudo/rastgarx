@@ -3,6 +3,12 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import FooterCompact from '../components/FooterCompact.astro';
 import { projects, workStats, looks, projectHref } from '../data/projects';
+import { absolute, breadcrumbSchema, graph } from '../data/schema';
+
+const jsonLd = graph(
+  { '@type': 'CollectionPage', url: absolute('/work', Astro.site), name: 'Rastup work', publisher: { '@id': absolute('/#business', Astro.site) } },
+  breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Work', path: '/work' }]),
+);
 
 const items = projects.map((p, i) => ({ ...p, href: projectHref(p), look: looks[i % looks.length] }));
 const links = [
@@ -12,7 +18,8 @@ const links = [
   { href: '/contact', label: 'CONTACT' },
 ];
 ---
-<Base title="Work | Rastup" description="Selected websites, ad campaigns and brand work by Rastup. We take on only five new clients a year.">
+<Base title="Our Work: Websites, Ad Campaigns & Branding | Rastup" description="Selected websites, ad campaigns and brand work by Rastup, a digital marketing agency in Pakistan that takes on only five new clients a year.">
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
   <div id="top" class="page">
     <div class="wrap">
       <Header links={links} homeHref="/" bookHref="/#book" />

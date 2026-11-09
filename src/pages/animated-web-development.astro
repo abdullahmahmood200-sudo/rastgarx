@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import FooterCompact from '../components/FooterCompact.astro';
+import { absolute, breadcrumbSchema, graph } from '../data/schema';
 
 // Files live in public/work/animated-web/.
 const base = '/work/animated-web';
@@ -24,6 +25,18 @@ const sites = [
   { name: 'SL Aesthetics', category: 'Aesthetics', image: 'sl-aesthetics.webp' },
 ];
 
+const jsonLd = graph(
+  {
+    '@type': 'CollectionPage',
+    url: absolute('/animated-web-development', Astro.site),
+    name: 'Animated web design and development portfolio',
+    provider: { '@id': absolute('/#business', Astro.site) },
+    about: { '@type': 'Service', name: 'Animated web development', provider: { '@id': absolute('/#business', Astro.site) } },
+    mainEntity: { '@type': 'ItemList', itemListElement: [...films, ...sites].map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: `${p.name} (${p.category})` })) },
+  },
+  breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Animated web development', path: '/animated-web-development' }]),
+);
+
 const links = [
   { href: '/work', label: 'WORK', current: true },
   { href: '/#solution', label: 'STUDIO' },
@@ -31,7 +44,8 @@ const links = [
   { href: '/contact', label: 'CONTACT' },
 ];
 ---
-<Base title="Animated Web Development | Rastup" description="Animated websites designed and built by Rastup for clinics, restaurants, jewellery brands and more.">
+<Base title="Animated Web Design & Development Portfolio | Rastup" description="See animated websites designed and built by Rastup, a digital marketing agency in Pakistan, for clinics, restaurants, jewellery brands and more.">
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
   <div id="top" class="page">
     <div class="wrap">
       <Header links={links} homeHref="/" bookHref="/#book" />

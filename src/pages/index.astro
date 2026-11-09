@@ -9,12 +9,15 @@ import Services from '../components/Services.astro';
 import DemoCall from '../components/DemoCall.astro';
 import Booking from '../components/Booking.astro';
 import Footer from '../components/Footer.astro';
-import { businessSchema, graph } from '../data/schema';
+import HomeFaq from '../components/HomeFaq.astro';
+import { businessSchema, faqSchema, graph } from '../data/schema';
+import { homeFaqs } from '../data/faqs';
 import { site } from '../data/site';
 
 const jsonLd = graph(
   businessSchema(Astro.site),
   { '@type': 'WebSite', '@id': new URL('/#website', Astro.site).toString(), url: new URL('/', Astro.site).toString(), name: site.name, publisher: { '@id': new URL('/#business', Astro.site).toString() } },
+  faqSchema(homeFaqs),
 );
 ---
 <Base>
@@ -30,6 +33,7 @@ const jsonLd = graph(
         <Solution />
         <Services />
         <DemoCall />
+        <HomeFaq />
         <Booking />
       </main>
     </div>

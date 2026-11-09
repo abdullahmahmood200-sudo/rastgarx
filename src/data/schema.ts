@@ -1,7 +1,14 @@
 // Structured data (JSON-LD) shared by pages, for search engines and answer engines.
 import { site } from './site';
 
-export const absolute = (path: string, base: URL | undefined) => new URL(path, base).toString();
+// Page URLs end in "/" to match the canonical URLs of the built pages.
+export const absolute = (path: string, base: URL | undefined) => {
+  const url = new URL(path, base);
+  if (!url.pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(url.pathname)) url.pathname += '/';
+  return url.toString();
+};
+
+const services = ['Website development', 'Animated web design', 'E-commerce websites', 'Ad creatives', 'SEO', 'AI voice operators'];
 
 export const businessSchema = (base: URL | undefined, areaServed?: object | object[]) => ({
   '@type': 'ProfessionalService',
@@ -11,14 +18,18 @@ export const businessSchema = (base: URL | undefined, areaServed?: object | obje
   description: site.description,
   email: site.email,
   telephone: site.phone,
-  image: absolute('/hero.webp', base),
+  image: absolute('/og-image.jpg', base),
+  logo: absolute('/logo.png', base),
+  slogan: 'We build. You profit.',
+  ...(site.socials.length ? { sameAs: site.socials } : {}),
+  makesOffer: services.map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   address: {
     '@type': 'PostalAddress',
     addressLocality: site.city,
     addressCountry: 'PK',
   },
   areaServed: areaServed ?? { '@type': 'Country', name: 'Pakistan' },
-  knowsAbout: ['Website development', 'Web design', 'E-commerce websites', 'Digital marketing', 'Advertising', 'SEO', 'AI voice operators'],
+  knowsAbout: ['Digital marketing', 'Marketing agency services', 'Website development', 'Web design', 'E-commerce websites', 'Advertising', 'SEO', 'AI voice operators'],
 });
 
 export const breadcrumbSchema = (base: URL | undefined, items: { name: string; path: string }[]) => ({

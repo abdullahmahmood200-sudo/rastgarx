@@ -2,9 +2,13 @@
 
 export const site = {
   name: 'Rastup',
-  title: 'Rastup | Animated websites, ads & AI voice operators',
+  title: 'Rastup | Digital Marketing Agency in Pakistan, Websites & Ads',
   description:
-    'Rastup builds animated, high-converting websites, ready-to-run ad creatives and AI voice operators, one growth system for your business.',
+    'Rastup is a digital marketing agency in Islamabad, Pakistan. We build animated, high-converting websites, ad creatives, SEO and AI voice operators.',
+
+  // Full URLs of your official profiles (Instagram, LinkedIn, Facebook, Google Business...).
+  // They tell Google and AI tools these accounts are the same business.
+  socials: [] as string[],
 
   city: 'Islamabad',
   country: 'Pakistan',

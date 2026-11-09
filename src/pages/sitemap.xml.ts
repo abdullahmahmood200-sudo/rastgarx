@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro';
-import { projects, projectHref } from '../data/projects';
+import { projects, projectHref, isThinProject } from '../data/projects';
 import { cities, cityHref } from '../data/cities';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
 
 // Paths end in "/" to match the canonical URLs of the built pages (dist/work/index.html).
 const slash = (p: string) => (p.endsWith("/") ? p : p + "/");
@@ -10,7 +13,9 @@ const pages: { path: string; priority: string; changefreq: string }[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/work', priority: '0.8', changefreq: 'monthly' },
   { path: '/animated-web-development', priority: '0.8', changefreq: 'monthly' },
-  ...projects.map((p) => ({ path: projectHref(p), priority: '0.6', changefreq: 'monthly' })),
+  ...projects.filter((p) => !isThinProject(p)).map((p) => ({ path: projectHref(p), priority: '0.6', changefreq: 'monthly' })),
+  { path: '/blog', priority: '0.8', changefreq: 'weekly' },
+  ...posts.map((p) => ({ path: `/blog/${p.id}`, priority: '0.7', changefreq: 'monthly' })),
   { path: '/contact', priority: '0.7', changefreq: 'yearly' },
   { path: '/locations', priority: '0.8', changefreq: 'monthly' },
   ...cities.map((c) => ({ path: cityHref(c), priority: '0.7', changefreq: 'monthly' })),

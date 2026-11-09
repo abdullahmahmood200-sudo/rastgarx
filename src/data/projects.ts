@@ -43,6 +43,9 @@ export const slugify = (name: string) =>
 
 export const projectHref = (p: Project) => `/work/${slugify(p.name)}`;
 
+// Case studies with no write-up or images stay out of search results until they have some.
+export const isThinProject = (p: Project) => !p.description && !p.gallery?.length;
+
 // Headline numbers in the Work intro row. `projects` defaults to the list above.
 // Set `clients` to a number to show it; leave null to hide that column.
 export const workStats = {

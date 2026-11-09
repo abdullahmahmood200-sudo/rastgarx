@@ -1,0 +1,99 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import FooterCompact from '../../components/FooterCompact.astro';
+import { absolute, breadcrumbSchema, faqSchema, graph } from '../../data/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const base = Astro.site;
+const path = `/blog/${post.id}`;
+const day = (date: Date) => date.toISOString().slice(0, 10);
+const shown = d.updated ?? d.published;
+const shownLabel = shown.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const nodes: object[] = [
+  {
+    '@type': 'BlogPosting',
+    '@id': absolute(`${path}#article`, base),
+    mainEntityOfPage: absolute(path, base),
+    headline: d.title,
+    description: d.description,
+    image: absolute('/og-image.jpg', base),
+    datePublished: day(d.published),
+    dateModified: day(shown),
+    author: { '@type': 'Organization', name: 'Rastup', url: absolute('/', base) },
+    publisher: { '@id': absolute('/#business', base) },
+  },
+  breadcrumbSchema(base, [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: d.title, path },
+  ]),
+];
+if (d.faqs.length) nodes.push(faqSchema(d.faqs));
+const jsonLd = graph(...nodes);
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/blog', label: 'BLOG', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title={d.seoTitle} description={d.description} ogType="article">
+  <meta slot="head" property="article:published_time" content={day(d.published)} />
+  <meta slot="head" property="article:modified_time" content={day(shown)} />
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+      <main class="blog">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog">Blog</a><span aria-hidden="true">/</span><span aria-current="page">{d.category}</span>
+        </nav>
+        <article class="post">
+          <header class="post-head">
+            <p class="eyebrow">({d.category})</p>
+            <h1 class="post-title">{d.title}<span class="dot">.</span></h1>
+            <p class="post-meta muted">By the Rastup team · {d.updated ? 'Updated' : 'Published'} <time datetime={day(shown)}>{shownLabel}</time></p>
+          </header>
+          <aside class="post-answer" aria-label="Short answer">
+            <span class="accent">The short answer</span>
+            <p>{d.answer}</p>
+          </aside>
+          <div class="post-body">
+            <Content />
+          </div>
+          {d.faqs.length > 0 && (
+            <section class="post-faq" aria-labelledby="faq-h">
+              <h2 id="faq-h">Frequently asked questions</h2>
+              <div class="faq">
+                {d.faqs.map((f) => (
+                  <details>
+                    <summary>{f.q}</summary>
+                    <p>{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+        </article>
+        <section class="work-cta center-section">
+          <span class="tag">WORK WITH US</span>
+          <h2 class="h-center">Want one team on your website and ads<span class="dot">?</span></h2>
+          <a class="cta" href="/#book">BOOK A FREE CALL</a>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>

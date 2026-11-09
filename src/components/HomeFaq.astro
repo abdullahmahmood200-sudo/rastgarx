@@ -1,0 +1,18 @@
+---
+import { homeFaqs } from '../data/faqs';
+---
+<section class="city-section city-split home-faq" aria-labelledby="home-faq-h">
+  <div>
+    <span class="tag">FAQ</span>
+    <h2 id="home-faq-h" class="city-h2">About our marketing agency<span class="dot">.</span></h2>
+    <a class="link-underline home-faq-link" href="/blog">Read our marketing guides</a>
+  </div>
+  <div class="faq">
+    {homeFaqs.map((f, i) => (
+      <details open={i === 0}>
+        <summary>{f.q}</summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+</section>

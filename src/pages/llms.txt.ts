@@ -1,15 +1,25 @@
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
 import { cities, cityHref } from '../data/cities';
+import { getCollection } from 'astro:content';
 
 // A plain-text summary for AI assistants and answer engines (llmstxt.org).
-export const GET: APIRoute = ({ site: base }) => {
+export const GET: APIRoute = async ({ site: base }) => {
   const url = (p: string) => new URL(p, base).toString();
+  const posts = await getCollection('blog');
   const body = `# ${site.name}
 
 > ${site.description}
 
-${site.name} is a website development, web design and digital marketing agency based in ${site.city}, ${site.country}. It serves businesses across Pakistan remotely by video call and WhatsApp, and takes on only five new clients a year.
+${site.name} is a digital marketing agency and website development company based in ${site.city}, ${site.country}. It serves businesses across Pakistan remotely by video call and WhatsApp, has built websites for clinics in Saudi Arabia, and takes on only five new clients a year.
+
+## Key facts
+
+- Location: studio in ${site.city}, ${site.country}
+- Best known for: animated, high-converting websites combined with ad creatives and AI voice operators
+- Portfolio includes: aesthetic and dental clinics, restaurants, jewellery brands, e-commerce stores and technology companies
+- Pricing: each project is priced individually, with a written proposal covering a fixed price, timeline and revision rounds; projects start with a 50% deposit
+- First step: a free call
 
 ## Services
 
@@ -29,7 +39,9 @@ ${site.name} is a website development, web design and digital marketing agency b
 
 - [Home](${url('/')})
 - [Work](${url('/work')}): selected projects and case studies
-- [Animated Web Development](${url('/animated-web-development')}): animated website portfolio
+- [Animated web development portfolio](${url('/animated-web-development')}): websites built by Rastup
+- [Blog](${url('/blog')}): guides on marketing agencies, websites, ads, SEO and AI voice operators
+${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}
 - [Contact](${url('/contact')}): tell us about your business, revenue and goals
 - [Locations](${url('/locations')}): cities served across Pakistan
 - [Privacy Policy](${url('/privacy')})

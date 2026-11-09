@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
-import { projects, slugify, projectHref, shotLooks, type Project } from '../../data/projects';
+import { projects, slugify, projectHref, shotLooks, isThinProject, type Project } from '../../data/projects';
 
 export function getStaticPaths() {
   return projects.map((project, index) => ({ params: { slug: slugify(project.name) }, props: { project, index } }));
@@ -20,6 +20,7 @@ const next = projects[(index + 1) % projects.length];
 <Base
   title={`${p.name}, ${p.services} | Rastup`}
   description={p.description ?? `${p.name} (${p.category}): ${p.services} by Rastup, ${p.year}.`}
+  noindex={isThinProject(p)}
 >
   <div class="page case" id="top">
     <div class="case-bar">
