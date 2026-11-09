@@ -9,6 +9,7 @@ const slash = (p: string) => (p.endsWith("/") ? p : p + "/");
 const pages: { path: string; priority: string; changefreq: string }[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/work', priority: '0.8', changefreq: 'monthly' },
+  { path: '/animated-web-development', priority: '0.8', changefreq: 'monthly' },
   ...projects.map((p) => ({ path: projectHref(p), priority: '0.6', changefreq: 'monthly' })),
   { path: '/contact', priority: '0.7', changefreq: 'yearly' },
   { path: '/locations', priority: '0.8', changefreq: 'monthly' },

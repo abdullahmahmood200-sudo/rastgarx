@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+
+// Files live in public/work/animated-web/.
+const base = '/work/animated-web';
+
+const films = [
+  { name: 'Smash Burgers', category: 'Restaurant', video: 'smash-burgers.mp4', poster: 'smash-burgers-poster.jpg' },
+  { name: 'Al Noor Clinic', category: 'Aesthetic Clinic', video: 'al-noor-clinic.mp4', poster: 'al-noor-poster.jpg' },
+  { name: 'Jazeera', category: 'Aesthetic Medicine', video: 'jazeera-clinic.mp4', poster: 'jazeera-hero.jpg' },
+];
+
+const sites = [
+  { name: 'Rawayat', category: 'Jewellery', image: 'rawayat.webp' },
+  { name: 'Cybental', category: 'Dental', image: 'cybental.webp' },
+  { name: 'Beecomb', category: 'Honey', image: 'beecomb.webp' },
+  { name: 'Glow Skin', category: 'Aesthetic Clinic', image: 'glow-skin.webp' },
+  { name: 'Discor', category: 'Industrial', image: 'discor.webp' },
+  { name: 'Smart Aesthetics', category: 'Aesthetic Clinic', image: 'smart-aesthetics.webp' },
+  { name: 'Nyxo', category: 'Agency', image: 'nyxo.webp' },
+  { name: 'What Clinic', category: 'Skin Clinic', image: 'what-clinic.webp' },
+  { name: 'SL Aesthetics', category: 'Aesthetics', image: 'sl-aesthetics.webp' },
+];
+
+const links = [
+  { href: '/work', label: 'WORK', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/#book', label: 'CAREER' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title="Animated Web Development | Rastup" description="Animated websites designed and built by Rastup for clinics, restaurants, jewellery brands and more.">
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main>
+        <section class="animated-web">
+          <div class="animated-web-head">
+            <div>
+              <p class="eyebrow">(Animated web development)</p>
+              <h1 class="display">Sites that move<span class="dot">.</span></h1>
+            </div>
+            <p class="lede">A selection of animated websites we’ve designed and built, from clinics and restaurants to jewellery and honey.</p>
+          </div>
+
+          <div class="aw-films">
+            {films.map((f) => (
+              <figure class="aw-item">
+                <div class="aw-media">
+                  <video
+                    data-aw-video
+                    src={`${base}/${f.video}`}
+                    poster={`${base}/${f.poster}`}
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    aria-label={`${f.name} website, screen recording`}
+                  ></video>
+                </div>
+                <figcaption><span class="aw-name">{f.name}</span><span class="work-cat">({f.category})</span></figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div class="aw-sites">
+            {sites.map((s) => (
+              <figure class="aw-item">
+                <div class="aw-media"><img src={`${base}/${s.image}`} alt={`${s.name} website homepage`} loading="lazy" decoding="async" /></div>
+                <figcaption><span class="aw-name">{s.name}</span><span class="work-cat">({s.category})</span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section class="work-cta center-section">
+          <span class="tag">WORK WITH US</span>
+          <h2 class="h-center">Your site could be next<span class="dot">.</span></h2>
+          <a class="cta" href="/#book">BOOK A FREE CALL</a>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>
+
+<script>
+  // Play each recording only while it is on screen; reduced-motion visitors keep the poster.
+  const videos = document.querySelectorAll<HTMLVideoElement>('[data-aw-video]');
+  if (videos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      });
+    }, { threshold: 0.25 });
+    videos.forEach((video) => observer.observe(video));
+  }
+</script>
