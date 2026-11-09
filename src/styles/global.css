@@ -251,7 +251,7 @@ img, video { display: block; max-width: 100%; }
 .footer { background: var(--bg-deep); padding: 0 60px 60px; display: flex; flex-direction: column; }
 .footer-brand { display: flex; align-items: center; gap: 3vw; margin-top: 40px; }
 .footer-brand svg { width: 15vw; max-width: 220px; min-width: 80px; height: auto; flex: none; }
-.footer-word { font-size: clamp(64px, 13vw, 210px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.85; color: var(--ink-strong); }
+.footer-word { font-size: clamp(56px, 10vw, 170px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.85; color: var(--ink-strong); }
 .footer .footer-brand + .footer-cols { margin-top: 96px; }
 .footer-cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px; font-size: 17px; line-height: 1.4; }
 .footer-about { flex: 1 1 360px; max-width: 420px; display: flex; flex-direction: column; gap: 40px; }
@@ -396,7 +396,7 @@ img, video { display: block; max-width: 100%; }
 .footer-compact { padding: 60px 60px 40px; gap: 60px; }
 .footer-compact .footer-brand { margin-top: 0; }
 .footer-compact .footer-brand svg { width: 12vw; max-width: 180px; min-width: 70px; }
-.footer-compact .footer-word { font-size: clamp(56px, 11vw, 180px); }
+.footer-compact .footer-word { font-size: clamp(48px, 9.5vw, 160px); }
 .footer-compact-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; font-size: 17px; }
 .footer-compact .footer-bottom { margin-top: 0; }
 
@@ -712,7 +712,7 @@ html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
   .footer, .footer-compact { margin-top: 96px; border-radius: 12px 12px 0 0; padding: 38px var(--gutter) 24px; gap: 0; }
   .footer-brand, .footer-compact .footer-brand { margin-top: 0; gap: 12px; }
   .footer-brand svg, .footer-compact .footer-brand svg { width: 48px; min-width: 0; height: 48px; }
-  .footer-word, .footer-compact .footer-word { font-size: 54px; line-height: 0.85; }
+  .footer-word, .footer-compact .footer-word { font-size: 42px; line-height: 0.85; }
   .footer-cols, .footer-compact-row { display: none; }
   .footer-acc { display: block; margin-top: 76px; }
   .footer-acc details { border-top: 1px solid var(--line); }

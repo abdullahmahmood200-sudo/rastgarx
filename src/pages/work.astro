@@ -6,7 +6,7 @@ import { projects, workStats, looks, projectHref } from '../data/projects';
 import { absolute, breadcrumbSchema, graph } from '../data/schema';
 
 const jsonLd = graph(
-  { '@type': 'CollectionPage', url: absolute('/work', Astro.site), name: 'Rastup work', publisher: { '@id': absolute('/#business', Astro.site) } },
+  { '@type': 'CollectionPage', url: absolute('/work', Astro.site), name: 'RastgarX work', publisher: { '@id': absolute('/#business', Astro.site) } },
   breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Work', path: '/work' }]),
 );
 
@@ -18,7 +18,7 @@ const links = [
   { href: '/contact', label: 'CONTACT' },
 ];
 ---
-<Base title="Our Work: Websites, Ad Campaigns & Branding | Rastup" description="Selected websites, ad campaigns and brand work by Rastup, a digital marketing agency in Pakistan that takes on only five new clients a year.">
+<Base title="Our Work: Websites, Ad Campaigns & Branding | RastgarX" description="Selected websites, ad campaigns and brand work by RastgarX, a digital marketing agency in Pakistan that takes on only five new clients a year.">
   <script type="application/ld+json" slot="head" set:html={jsonLd} />
   <div id="top" class="page">
     <div class="wrap">
@@ -39,12 +39,12 @@ const links = [
               <span><span class="accent">&gt;</span> {workStats.projects} Projects</span>
             </div>
           </div>
-          <p class="lede work-pitch">Unlike most agencies, we don’t take on every client who can pay the bill. At Rastup, we work with only five new clients a year: brands we believe in and can grow with. Keeping it small lets us put real care into every site, every ad and every call flow, so each launch converts from day one.</p>
+          <p class="lede work-pitch">Unlike most agencies, we don’t take on every client who can pay the bill. At RastgarX, we work with only five new clients a year: brands we believe in and can grow with. Keeping it small lets us put real care into every site, every ad and every call flow, so each launch converts from day one.</p>
         </section>
 
         <section class="work-head">
           <div>
-            <p class="eyebrow">(Rastup values)</p>
+            <p class="eyebrow">(RastgarX values)</p>
             <h1 class="display">We trust in ownership<span class="dot">.</span></h1>
           </div>
           <div class="view-toggle" role="group" aria-label="View" data-view-toggle>

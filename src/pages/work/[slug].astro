@@ -18,8 +18,8 @@ const shots = p.gallery?.length
 const next = projects[(index + 1) % projects.length];
 ---
 <Base
-  title={`${p.name}, ${p.services} | Rastup`}
-  description={p.description ?? `${p.name} (${p.category}): ${p.services} by Rastup, ${p.year}.`}
+  title={`${p.name}, ${p.services} | RastgarX`}
+  description={p.description ?? `${p.name} (${p.category}): ${p.services} by RastgarX, ${p.year}.`}
   noindex={isThinProject(p)}
 >
   <div class="page case" id="top">
@@ -40,7 +40,7 @@ const next = projects[(index + 1) % projects.length];
             <span class="accent">{p.year}</span>
           </div>
           {p.description && <p class="lede">{p.description}</p>}
-          <p class="case-rights muted">©{p.year} All images and materials are owned by {p.name} or Rastup.</p>
+          <p class="case-rights muted">©{p.year} All images and materials are owned by {p.name} or RastgarX.</p>
           {p.liveUrl && (
             <a class="case-live" href={p.liveUrl} target="_blank" rel="noopener">VISIT LIVE SITE <Arrow /></a>
           )}

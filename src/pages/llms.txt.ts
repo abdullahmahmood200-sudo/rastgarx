@@ -39,7 +39,7 @@ ${site.name} is a digital marketing agency and website development company based
 
 - [Home](${url('/')})
 - [Work](${url('/work')}): selected projects and case studies
-- [Animated web development portfolio](${url('/animated-web-development')}): websites built by Rastup
+- [Animated web development portfolio](${url('/animated-web-development')}): websites built by RastgarX
 - [Blog](${url('/blog')}): guides on marketing agencies, websites, ads, SEO and AI voice operators
 ${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}
 - [Contact](${url('/contact')}): tell us about your business, revenue and goals

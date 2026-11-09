@@ -29,7 +29,7 @@ const nodes: object[] = [
     image: absolute('/og-image.jpg', base),
     datePublished: day(d.published),
     dateModified: day(shown),
-    author: { '@type': 'Organization', name: 'Rastup', url: absolute('/', base) },
+    author: { '@type': 'Organization', name: 'RastgarX', url: absolute('/', base) },
     publisher: { '@id': absolute('/#business', base) },
   },
   breadcrumbSchema(base, [
@@ -64,7 +64,7 @@ const links = [
           <header class="post-head">
             <p class="eyebrow">({d.category})</p>
             <h1 class="post-title">{d.title}<span class="dot">.</span></h1>
-            <p class="post-meta muted">By the Rastup team · {d.updated ? 'Updated' : 'Published'} <time datetime={day(shown)}>{shownLabel}</time></p>
+            <p class="post-meta muted">By the RastgarX team · {d.updated ? 'Updated' : 'Published'} <time datetime={day(shown)}>{shownLabel}</time></p>
           </header>
           <aside class="post-answer" aria-label="Short answer">
             <span class="accent">The short answer</span>

@@ -1,19 +1,19 @@
 // Homepage questions. These appear on the page and in its structured data.
 export const homeFaqs = [
   {
-    q: 'What does Rastup do?',
-    a: 'Rastup is a digital marketing agency in Islamabad, Pakistan. We build animated, high-converting websites, create ad creatives for social media, posters and billboards, handle SEO, and set up AI voice operators that answer calls and book customers in.',
+    q: 'What does RastgarX do?',
+    a: 'RastgarX is a digital marketing agency in Islamabad, Pakistan. We build animated, high-converting websites, create ad creatives for social media, posters and billboards, handle SEO, and set up AI voice operators that answer calls and book customers in.',
   },
   {
-    q: 'Where does Rastup work?',
+    q: 'Where does RastgarX work?',
     a: 'Our studio is in Islamabad. We work with businesses across Pakistan remotely by video call and WhatsApp, and we have also built websites for clinics in Saudi Arabia.',
   },
   {
-    q: 'What kinds of businesses does Rastup work with?',
+    q: 'What kinds of businesses does RastgarX work with?',
     a: 'Our portfolio includes aesthetic and dental clinics, restaurants, jewellery brands, e-commerce stores and technology companies. We take on only five new clients a year.',
   },
   {
-    q: 'How much does Rastup charge?',
+    q: 'How much does RastgarX charge?',
     a: 'Every project is priced individually, based on what it needs. After a free call we send a written proposal with a fixed price, timeline and the number of revision rounds. Projects start with a 50% deposit and the balance is due on delivery.',
   },
   {

@@ -1,6 +1,6 @@
 ---
 title: How to choose the best marketing agency in Pakistan
-seoTitle: How to Choose the Best Marketing Agency in Pakistan | Rastup
+seoTitle: How to Choose the Best Marketing Agency in Pakistan | RastgarX
 description: A practical guide to choosing the best marketing agency in Pakistan, with the questions to ask, red flags to avoid and how to compare digital marketing agencies.
 category: Marketing agencies
 published: 2026-11-09
@@ -22,7 +22,7 @@ faqs:
 
 Most businesses search for the best marketing agency in Pakistan and end up comparing logos, follower counts and monthly fees. Those are easy to compare, and they say very little about whether an agency can bring you customers.
 
-Rastup is a marketing agency too, so keep that in mind as you read. The checks below work for any agency, including us.
+RastgarX is a marketing agency too, so keep that in mind as you read. The checks below work for any agency, including us.
 
 ## What makes a marketing agency good?
 
@@ -113,6 +113,6 @@ If you prefer someone local, compare a [marketing agency in Islamabad](/location
 
 Ads and SEO send people to your website, so a slow or confusing site wastes the money spent reaching them. Before you increase your budget, check that a visitor on a phone can understand what you do and take the next step within a few seconds.
 
-At Rastup we treat the website, ad creatives and follow-up as one system. We build [animated, high-converting websites](/animated-web-development), create ads for social media, posters and billboards, and set up AI voice operators that answer calls and book customers in. We take on only five new clients a year, so we may not be the right fit for everyone, and every project starts with a written proposal covering the price, timeline and revision rounds.
+At RastgarX we treat the website, ad creatives and follow-up as one system. We build [animated, high-converting websites](/animated-web-development), create ads for social media, posters and billboards, and set up AI voice operators that answer calls and book customers in. We take on only five new clients a year, so we may not be the right fit for everyone, and every project starts with a written proposal covering the price, timeline and revision rounds.
 
 You can [see our work](/work) or [tell us about your business](/contact).
