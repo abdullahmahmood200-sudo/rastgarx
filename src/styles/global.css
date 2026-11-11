@@ -315,7 +315,7 @@ img, video { display: block; max-width: 100%; }
   .lede { font-size: 20px; }
   .problem-head > p { font-size: 20px; }
   .card { min-height: 0; }
-  .card h3 { font-size: 38px; }
+  .card h3 { font-size: 30px; }
   .player { padding: 20px; gap: 24px; }
   .wave { height: 88px; gap: 3px; }
   .solution-copy, .features, .demo-copy, .player, .footer-about, .footer-grid { flex-basis: 100%; }
@@ -459,6 +459,7 @@ img, video { display: block; max-width: 100%; }
 @media (max-width: 560px) {
   .case-head { gap: 24px; padding-top: 24px; }
   .case-title { flex-basis: 100%; flex-direction: column; gap: 8px; }
+  .case-title h1 { font-size: 44px; }
   .case-info { gap: 18px; }
   .case-shot { flex-basis: 86vw; border-radius: 10px; }
   .case-shot .pr { width: 200px; height: 200px; right: -40px; bottom: -50px; }
@@ -660,6 +661,11 @@ html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
   }
   .nav a:hover, .nav a.is-current { color: var(--accent) !important; }
   html.menu-open, html.menu-open body { overflow: hidden; }
+}
+/* Very small phones (under 360px): the full-size wordmark and buttons do not fit. */
+@media (max-width: 359px) {
+  .brand-word { font-size: 22px; }
+  .header-right { gap: 16px; }
 }
 
 @media (max-width: 560px) {
