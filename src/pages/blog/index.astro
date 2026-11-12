@@ -9,8 +9,8 @@ import { breadcrumbSchema, graph } from '../../data/schema';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 const formatDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
-const title = 'Marketing Agency Blog: Websites, Ads, SEO & AI | RastgarX';
-const description = 'Practical guides from RastgarX, a marketing agency in Pakistan, on choosing an agency, websites that convert, advertising, SEO and AI voice operators.';
+const title = 'Marketing Agency Blog: Websites, Marketing & Automations | RastgarX';
+const description = 'Practical guides from RastgarX, a marketing agency in Pakistan, on choosing an agency, websites that convert, marketing, SEO and automations.';
 const jsonLd = graph(
   { '@type': 'Blog', '@id': new URL('/blog#blog', Astro.site).toString(), url: new URL('/blog', Astro.site).toString(), name: 'RastgarX Blog', description, publisher: { '@id': new URL('/#business', Astro.site).toString() } },
   breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }]),
@@ -32,7 +32,7 @@ const links = [
         <section class="blog-head">
           <p class="eyebrow">(RastgarX blog)</p>
           <h1 class="display">Marketing that pays<span class="dot">.</span></h1>
-          <p class="lede">Plain guides on choosing a marketing agency, building websites that convert, advertising, SEO and AI voice operators.</p>
+          <p class="lede">Plain guides on choosing a marketing agency, building websites that convert, marketing, SEO and automations.</p>
         </section>
         <section class="blog-list" aria-label="Articles">
           {posts.map((post) => (

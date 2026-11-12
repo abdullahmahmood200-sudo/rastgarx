@@ -2,7 +2,7 @@
 export const homeFaqs = [
   {
     q: 'What does RastgarX do?',
-    a: 'RastgarX is a digital marketing agency in Islamabad, Pakistan. We build animated, high-converting websites, create ad creatives for social media, posters and billboards, handle SEO, and set up AI voice operators that answer calls and book customers in.',
+    a: 'RastgarX is a digital marketing agency in Islamabad, Pakistan. We offer three services: websites (animated, high-converting sites and online stores), marketing (ads for social media, posters and billboards, plus SEO) and automations (AI voice operators and workflows that answer calls, book customers in and follow up leads).',
   },
   {
     q: 'Where does RastgarX work?',
@@ -21,7 +21,7 @@ export const homeFaqs = [
     a: 'An AI voice operator answers your business calls at any hour, holds a natural conversation, books the job into your calendar, and knows when to hand the call to a person.',
   },
   {
-    q: 'Why combine a website, ads and voice in one agency?',
-    a: 'Ads bring people in, the website turns them into enquiries, and the voice operator makes sure no call is missed. When one team is responsible for all three, they work as one system.',
+    q: 'Why combine websites, marketing and automations in one agency?',
+    a: 'Marketing brings people in, the website turns them into enquiries, and automations make sure every call and lead gets an answer. When one team is responsible for all three, they work as one system.',
   },
 ];

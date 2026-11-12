@@ -1,0 +1,159 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+import { absolute, breadcrumbSchema, graph } from '../data/schema';
+
+// Workflow diagrams and demo videos live in public/work/automations/.
+// A project with `video` plays <video>.mp4 (poster <video>-poster.jpg); otherwise it shows `image`.
+const base = '/work/automations';
+
+const projects: { name: string; category: string; image?: string; video?: string; body: string; tools: string[] }[] = [
+  {
+    name: 'AI voice appointment booking',
+    category: 'Voice AI',
+    image: 'voice-booking.webp',
+    body: 'The backend behind an AI voice agent. When a call comes in, it checks the calendar, books the meeting, logs the caller in a sheet and sends a confirmation email.',
+    tools: ['Vapi', 'Google Calendar', 'Google Sheets', 'AI', 'Gmail'],
+  },
+  {
+    name: 'WhatsApp AI agent',
+    category: 'Customer support',
+    image: 'whatsapp-agent.webp',
+    video: 'whatsapp-agent',
+    body: 'Answers customer questions on WhatsApp at any hour, remembers the conversation and pulls answers from the business’s own website.',
+    tools: ['WhatsApp', 'Gemini', 'Memory', 'Website data'],
+  },
+  {
+    name: 'Lead capture and nurturing',
+    category: 'Sales',
+    image: 'lead-nurturing.webp',
+    body: 'Every form submission is saved to Airtable, an AI agent writes a personal reply with a booking link, Gmail sends it and the lead is marked as contacted.',
+    tools: ['Tally', 'Airtable', 'Calendly', 'AI', 'Gmail'],
+  },
+  {
+    name: 'Customer onboarding',
+    category: 'CRM',
+    image: 'customer-onboarding.webp',
+    body: 'New customers are checked, added to HubSpot and welcomed by email, then receive onboarding documents and timed follow-ups over their first days while the team is updated in Slack.',
+    tools: ['HubSpot', 'Gmail', 'Slack', 'Webhooks'],
+  },
+  {
+    name: 'Lead generation agent',
+    category: 'Outreach',
+    image: 'lead-generation.webp',
+    video: 'lead-generation',
+    body: 'Takes a list of target companies, finds and enriches contacts, researches each one on the web and writes a personalised email draft ready to send.',
+    tools: ['Google Sheets', 'Tavily', 'Gemini', 'Gmail'],
+  },
+  {
+    name: 'Lead scraping and enrichment',
+    category: 'Data',
+    image: 'lead-scraping.webp',
+    video: 'lead-scraping',
+    body: 'A form starts a scrape, contacts are found, cleaned and de-duplicated, an AI agent qualifies them, records go to Airtable and the sales team gets a Slack alert.',
+    tools: ['Apify', 'OpenAI', 'Airtable', 'Slack'],
+  },
+  {
+    name: 'Website data scraper',
+    category: 'Education',
+    image: 'website-scraper.webp',
+    video: 'website-scraper',
+    body: 'Built for a K12 education project. It works through a list of websites, gets past anti-bot checks and JavaScript pages, extracts contact details with AI and writes them back to the sheet.',
+    tools: ['Google Sheets', 'ZenRows', 'Gemini'],
+  },
+  {
+    name: 'Product price scraper',
+    category: 'E-commerce',
+    video: 'product-scraper',
+    body: 'Collects product names, prices, reviews and links from an online marketplace and lays them out in Google Sheets, ready for price tracking and competitor research.',
+    tools: ['Web scraping', 'n8n', 'Google Sheets'],
+  },
+  {
+    name: 'Social media auto-posting',
+    category: 'Content',
+    image: 'social-posting.webp',
+    body: 'Drop a video into Google Drive and it is captioned by AI and published to YouTube and Instagram automatically.',
+    tools: ['Google Drive', 'Gemini', 'YouTube', 'Instagram'],
+  },
+];
+
+const jsonLd = graph(
+  {
+    '@type': 'CollectionPage',
+    url: absolute('/automations', Astro.site),
+    name: 'Business automation portfolio',
+    provider: { '@id': absolute('/#business', Astro.site) },
+    about: { '@type': 'Service', name: 'Business automation', provider: { '@id': absolute('/#business', Astro.site) } },
+    mainEntity: { '@type': 'ItemList', itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name, description: p.body })) },
+  },
+  breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Automations', path: '/automations' }]),
+);
+
+const links = [
+  { href: '/work', label: 'WORK', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/blog', label: 'BLOG' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title="Business Automation & AI Agents Portfolio | RastgarX" description="n8n automations and AI agents built by RastgarX: AI voice booking, WhatsApp agents, lead capture, CRM onboarding, lead generation and social media posting.">
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main>
+        <section class="animated-web">
+          <div class="animated-web-head">
+            <div>
+              <p class="eyebrow">(Automations)</p>
+              <h1 class="display">Work that runs itself<span class="dot">.</span></h1>
+            </div>
+            <p class="lede">AI agents and n8n workflows we’ve built to answer calls and messages, follow up leads, onboard customers and post content, so nothing waits on a person.</p>
+          </div>
+
+          <div class="auto-grid">
+            {projects.map((p) => (
+              <figure class="aw-item auto-item">
+                <div class:list={['auto-media', { 'is-video': p.video }]}>
+                  {p.video
+                    ? <video data-auto-video src={`${base}/${p.video}.mp4`} poster={`${base}/${p.video}-poster.jpg`} muted loop playsinline preload="none" aria-label={`${p.name}, screen recording of the automation running`}></video>
+                    : <img src={`${base}/${p.image}`} alt={`${p.name} workflow in n8n`} loading="lazy" decoding="async" />}
+                </div>
+                <figcaption>
+                  <span class="auto-title"><span class="aw-name">{p.name}</span><span class="work-cat">({p.category})</span></span>
+                  <p class="auto-body muted">{p.body}</p>
+                  <ul class="tags auto-tools" aria-label="Tools used">{p.tools.map((t) => <li class="tag-soft">{t}</li>)}</ul>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section class="work-cta center-section">
+          <span class="tag">WORK WITH US</span>
+          <h2 class="h-center">What should your business stop doing by hand<span class="dot">?</span></h2>
+          <a class="cta" href="/#book">BOOK A FREE CALL</a>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>
+
+<script>
+  // Play each recording only while it is on screen; reduced-motion visitors keep the poster.
+  const videos = document.querySelectorAll<HTMLVideoElement>('[data-auto-video]');
+  if (videos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      });
+    }, { threshold: 0.25 });
+    videos.forEach((video) => observer.observe(video));
+  }
+</script>

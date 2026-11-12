@@ -16,18 +16,16 @@ ${site.name} is a digital marketing agency and website development company based
 ## Key facts
 
 - Location: studio in ${site.city}, ${site.country}
-- Best known for: animated, high-converting websites combined with ad creatives and AI voice operators
+- Best known for: three services working as one system: websites, marketing and automations
 - Portfolio includes: aesthetic and dental clinics, restaurants, jewellery brands, e-commerce stores and technology companies
 - Pricing: each project is priced individually, with a written proposal covering a fixed price, timeline and revision rounds; projects start with a 50% deposit
 - First step: a free call
 
 ## Services
 
-- Website development and animated web design
-- E-commerce websites
-- Digital marketing and ad creatives for social media, posters and billboards
-- SEO services (technical, on-page and local SEO)
-- AI voice operators that answer business calls and book customers in
+- Websites: website development, animated web design and e-commerce stores
+- Marketing: ad creatives for social media, posters and billboards, plus SEO (technical, on-page and local)
+- Automations: AI voice operators that answer business calls and book customers in, and automated workflows such as lead follow-up
 
 ## Contact
 
@@ -40,7 +38,8 @@ ${site.name} is a digital marketing agency and website development company based
 - [Home](${url('/')})
 - [Work](${url('/work')}): selected projects and case studies
 - [Animated web development portfolio](${url('/animated-web-development')}): websites built by RastgarX
-- [Blog](${url('/blog')}): guides on marketing agencies, websites, ads, SEO and AI voice operators
+- [Automations portfolio](${url('/automations')}): n8n workflows and AI agents built by RastgarX, including AI voice booking, WhatsApp agents, lead nurturing, CRM onboarding and lead generation
+- [Blog](${url('/blog')}): guides on marketing agencies, websites, marketing, SEO and automations
 ${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}
 - [Contact](${url('/contact')}): tell us about your business, revenue and goals
 - [Locations](${url('/locations')}): cities served across Pakistan

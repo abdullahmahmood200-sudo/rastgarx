@@ -8,7 +8,7 @@ export const absolute = (path: string, base: URL | undefined) => {
   return url.toString();
 };
 
-const services = ['Website development', 'Animated web design', 'E-commerce websites', 'Ad creatives', 'SEO', 'AI voice operators'];
+const services = ['Website development', 'E-commerce websites', 'Digital marketing', 'Advertising', 'SEO', 'Business automation', 'AI voice operators'];
 
 export const businessSchema = (base: URL | undefined, areaServed?: object | object[]) => ({
   '@type': 'ProfessionalService',
@@ -29,7 +29,7 @@ export const businessSchema = (base: URL | undefined, areaServed?: object | obje
     addressCountry: 'PK',
   },
   areaServed: areaServed ?? { '@type': 'Country', name: 'Pakistan' },
-  knowsAbout: ['Digital marketing', 'Marketing agency services', 'Website development', 'Web design', 'E-commerce websites', 'Advertising', 'SEO', 'AI voice operators'],
+  knowsAbout: ['Websites', 'Website development', 'Web design', 'E-commerce websites', 'Digital marketing', 'Marketing agency services', 'Advertising', 'SEO', 'Business automation', 'AI voice operators'],
 });
 
 export const breadcrumbSchema = (base: URL | undefined, items: { name: string; path: string }[]) => ({
