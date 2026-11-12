@@ -63,7 +63,7 @@ const links = [
         <article class="post">
           <header class="post-head">
             <p class="eyebrow">({d.category})</p>
-            <h1 class="post-title">{d.title}<span class="dot">.</span></h1>
+            <h1 class="post-title">{d.title}{!/[.?!]$/.test(d.title) && <span class="dot">.</span>}</h1>
             <p class="post-meta muted">By the RastgarX team · {d.updated ? 'Updated' : 'Published'} <time datetime={day(shown)}>{shownLabel}</time></p>
           </header>
           <aside class="post-answer" aria-label="Short answer">

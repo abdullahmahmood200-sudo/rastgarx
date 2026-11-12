@@ -38,7 +38,7 @@ const links = [
           {posts.map((post) => (
             <a class="blog-row" href={`/blog/${post.id}`}>
               <span class="blog-row-meta"><span>{post.data.category}</span><time datetime={post.data.published.toISOString().slice(0, 10)}>{formatDate(post.data.published)}</time></span>
-              <span class="blog-row-title">{post.data.title}<span class="dot">.</span></span>
+              <span class="blog-row-title">{post.data.title}{!/[.?!]$/.test(post.data.title) && <span class="dot">.</span>}</span>
               <span class="blog-row-desc muted">{post.data.description}</span>
               <span class="blog-row-more">READ THE GUIDE <Arrow /></span>
             </a>
