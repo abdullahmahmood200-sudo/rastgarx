@@ -19,6 +19,7 @@ const pages: { path: string; priority: string; changefreq: string }[] = [
   { path: '/blog', priority: '0.8', changefreq: 'weekly' },
   ...posts.map((p) => ({ path: `/blog/${p.id}`, priority: '0.7', changefreq: 'monthly' })),
   { path: '/contact', priority: '0.7', changefreq: 'yearly' },
+  { path: '/careers', priority: '0.5', changefreq: 'monthly' },
   { path: '/locations', priority: '0.8', changefreq: 'monthly' },
   ...cities.map((c) => ({ path: cityHref(c), priority: '0.7', changefreq: 'monthly' })),
   { path: '/privacy', priority: '0.2', changefreq: 'yearly' },

@@ -43,6 +43,7 @@ ${site.name} is a growth partner for businesses: a digital marketing agency, web
 - [Blog](${url('/blog')}): guides on marketing agencies, websites, marketing, SEO and automations
 ${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}
 - [Contact](${url('/contact')}): tell us about your business, revenue and goals
+- [Careers](${url('/careers')}): open roles at RastgarX in Islamabad and remote
 - [Locations](${url('/locations')}): cities served across Pakistan
 - [Privacy Policy](${url('/privacy')})
 - [Terms of Service](${url('/terms')})

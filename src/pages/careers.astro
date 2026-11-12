@@ -1,0 +1,161 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+import Arrow from '../components/Arrow.astro';
+import { site } from '../data/site';
+import { absolute, breadcrumbSchema, graph } from '../data/schema';
+
+// Open positions. Edit, add or remove roles here.
+const roles = [
+  {
+    title: 'Web Developer',
+    team: 'Websites',
+    type: 'Full-time · Islamabad or remote',
+    summary: 'Build fast, animated websites and online stores that turn visitors into enquiries.',
+    do: [
+      'Build client sites from design to launch, with motion that has a job',
+      'Keep every page fast on a phone and readable by Google',
+      'Turn feedback into fixes quickly and carefully',
+    ],
+    fit: [
+      'You write clean HTML, CSS and JavaScript, and know a modern framework',
+      'You have built scroll or timeline animations, for example with GSAP',
+      'You can show live sites you built',
+    ],
+  },
+  {
+    title: 'Motion Designer & Video Editor',
+    team: 'Marketing',
+    type: 'Full-time · Islamabad or remote',
+    summary: 'Make reels and video ads that stop the scroll in the first second.',
+    do: [
+      'Edit short-form reels and ads for Instagram, TikTok and Shorts',
+      'Animate type, products and UI into clear, punchy stories',
+      'Keep every piece on brand, from the hook to the end card',
+    ],
+    fit: [
+      'You are fluent in After Effects, Premiere or CapCut, or similar tools',
+      'You understand hooks, pacing and captions for silent viewing',
+      'You have a reel of work you are proud of',
+    ],
+  },
+  {
+    title: 'Automation Engineer (n8n & AI agents)',
+    team: 'Automations',
+    type: 'Full-time · Islamabad or remote',
+    summary: 'Build the systems that answer every call and message and follow up until it books.',
+    do: [
+      'Build n8n workflows connecting CRMs, sheets, calendars and messaging',
+      'Set up AI voice and WhatsApp agents for client businesses',
+      'Test, monitor and improve automations after launch',
+    ],
+    fit: [
+      'You have built working automations in n8n, Make or Zapier',
+      'You are comfortable with APIs, webhooks and JSON',
+      'You care about what happens when something goes wrong',
+    ],
+  },
+  {
+    title: 'Performance Marketer',
+    team: 'Marketing',
+    type: 'Full-time · Islamabad or remote',
+    summary: 'Run ads that bring in customers, not just clicks, and prove it with real numbers.',
+    do: [
+      'Plan, launch and manage Meta and Google ad campaigns',
+      'Set up tracking so we can see which ads turn into customers',
+      'Work with design to test new creative every week',
+    ],
+    fit: [
+      'You have managed real ad budgets and can explain the results',
+      'You read numbers before opinions',
+      'You know when the problem is the website, not the ad',
+    ],
+  },
+  {
+    title: 'Content & SEO Writer',
+    team: 'Marketing',
+    type: 'Part-time or freelance · Remote',
+    summary: 'Write clear pages and guides that rank on Google and get quoted by AI tools.',
+    do: [
+      'Write blog guides, landing pages and case studies',
+      'Research what customers search for and answer it plainly',
+      'Keep every claim accurate, with no invented numbers',
+    ],
+    fit: [
+      'You write simple, direct English',
+      'You understand the basics of SEO',
+      'You can share published writing',
+    ],
+  },
+];
+
+const apply = (role: string) => `mailto:${site.email}?subject=${encodeURIComponent('Application: ' + role)}`;
+
+const jsonLd = graph(
+  { '@type': 'WebPage', url: absolute('/careers', Astro.site), name: 'Careers at RastgarX', about: { '@id': absolute('/#business', Astro.site) } },
+  breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Careers', path: '/careers' }]),
+);
+
+const links = [
+  { href: '/work', label: 'WORK' },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/careers', label: 'CAREERS', current: true },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title="Careers at RastgarX | Jobs in Islamabad & Remote" description="Join RastgarX, a growth partner in Islamabad. Open roles for web developers, motion designers, automation engineers, performance marketers and SEO writers.">
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main>
+        <section class="animated-web">
+          <div class="animated-web-head">
+            <div>
+              <p class="eyebrow">(Careers)</p>
+              <h1 class="display">Build what businesses run on<span class="dot">.</span></h1>
+            </div>
+            <p class="lede">We are a small team that fixes the three places businesses lose customers: marketing, websites and automations. We take on five new clients a year, so everyone here works on real projects that ship.</p>
+          </div>
+
+          <div class="mk-block">
+            <h2 class="mk-h2">Open positions<span class="dot">.</span></h2>
+            <div class="faq careers-list">
+              {roles.map((r, i) => (
+                <details open={i === 0}>
+                  <summary>
+                    <span class="career-title">{r.title}</span>
+                    <span class="career-meta muted">{r.team} · {r.type}</span>
+                  </summary>
+                  <div class="career-body">
+                    <p class="lede">{r.summary}</p>
+                    <div class="career-cols">
+                      <div>
+                        <h3>What you’ll do</h3>
+                        <ul>{r.do.map((t) => <li>{t}</li>)}</ul>
+                      </div>
+                      <div>
+                        <h3>You’ll fit if</h3>
+                        <ul>{r.fit.map((t) => <li>{t}</li>)}</ul>
+                      </div>
+                    </div>
+                    <a class="cta" href={apply(r.title)}>APPLY FOR THIS ROLE <Arrow /></a>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+
+          <div class="careers-open">
+            <h2 class="mk-h2">Don’t see your role<span class="dot">?</span></h2>
+            <p class="lede muted">If you are very good at something that helps businesses win customers, send us your work anyway at <a href={`mailto:${site.email}?subject=${encodeURIComponent('Open application')}`}>{site.email}</a>, with a few lines about what you would do here.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>
