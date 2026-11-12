@@ -29,7 +29,7 @@ export const businessSchema = (base: URL | undefined, areaServed?: object | obje
     addressCountry: 'PK',
   },
   areaServed: areaServed ?? { '@type': 'Country', name: 'Pakistan' },
-  knowsAbout: ['Websites', 'Website development', 'Web design', 'E-commerce websites', 'Digital marketing', 'Marketing agency services', 'Advertising', 'SEO', 'Business automation', 'AI voice operators'],
+  knowsAbout: ['Business growth', 'Websites', 'Website development', 'Web design', 'E-commerce websites', 'Digital marketing', 'Marketing agency services', 'Advertising', 'SEO', 'Business automation', 'AI voice operators'],
 });
 
 export const breadcrumbSchema = (base: URL | undefined, items: { name: string; path: string }[]) => ({

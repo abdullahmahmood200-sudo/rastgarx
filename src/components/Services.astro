@@ -1,33 +1,37 @@
 ---
+// One card per leak, in the order a customer meets them.
 const services = [
   {
+    leak: 'Fixes leak 01',
+    title: ['Marketing'],
+    body: 'Reels, ads and SEO that stop the scroll and bring in people who are ready to buy, not just people who like the post.',
+    points: ['Reels & video ads', 'Ad creatives & campaigns', 'SEO & Google Maps', 'Brand identity'],
+    link: { href: '/marketing', label: 'VIEW OUR WORK' },
+  },
+  {
+    leak: 'Fixes leak 02',
     title: ['Websites'],
-    body: 'Animated, high-performance websites and online stores engineered to turn visitors into customers.',
+    body: 'Fast, animated websites and online stores built around one action, so paid visitors become enquiries instead of bouncing.',
     points: ['Custom design & brand kit', 'Animations & interactions', 'E-commerce stores', 'Mobile-first & fast-loading'],
     link: { href: '/animated-web-development', label: 'VIEW OUR WORK' },
     green: true,
   },
   {
-    title: ['Marketing'],
-    body: 'Ad campaigns, social creatives and SEO that put your business in front of the right customers.',
-    points: ['Ad creatives & campaigns', 'Posters, billboards & social', 'SEO & Google Maps', 'Built to stop the scroll'],
-    link: { href: '/marketing', label: 'VIEW OUR WORK' },
-  },
-  {
+    leak: 'Fixes leak 03',
     title: ['Automations'],
-    body: 'AI voice operators and automated workflows that answer every call, book customers in and keep leads from slipping away.',
-    points: ['AI voice operator, day and night', 'Books straight into your calendar', 'Automated lead follow-up', 'Knows when to hand over'],
+    body: 'AI voice and WhatsApp agents plus workflows that answer every enquiry in seconds and follow up until it books.',
+    points: ['AI voice operator, day and night', 'WhatsApp AI agent', 'Automated lead follow-up', 'Bookings into your calendar'],
     link: { href: '/automations', label: 'VIEW OUR WORK' },
   },
 ];
 ---
 <section id="work" class="services center-section">
-  <span class="tag">WHAT WE BUILD</span>
-  <h2 class="h-center">One system. Three moving parts.<br /><span class="muted">Built to run as one.</span></h2>
+  <span class="tag">ONE TEAM. THE WHOLE SYSTEM.</span>
+  <h2 class="h-center">Three leaks. One team.<br /><span class="muted">Judged by one number: customers.</span></h2>
   <div class="cards">
-    {services.map((s, i) => (
+    {services.map((s) => (
       <article class:list={['card', 'lift', { 'is-green': s.green }]}>
-        <span>({String(i + 1).padStart(2, '0')})</span>
+        <span>({s.leak})</span>
         <h3>{s.title.map((line, j) => <>{j > 0 && <br />}{line}</>)}</h3>
         <p class="body">{s.body}</p>
         <ul>{s.points.map((p) => <li>{p}</li>)}</ul>

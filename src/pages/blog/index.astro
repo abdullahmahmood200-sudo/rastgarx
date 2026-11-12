@@ -9,8 +9,8 @@ import { breadcrumbSchema, graph } from '../../data/schema';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 const formatDate = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
-const title = 'Marketing Agency Blog: Websites, Marketing & Automations | RastgarX';
-const description = 'Practical guides from RastgarX, a marketing agency in Pakistan, on choosing an agency, websites that convert, marketing, SEO and automations.';
+const title = 'Growth Blog: Websites, Marketing & Automations | RastgarX';
+const description = 'Practical guides from RastgarX, a growth partner in Pakistan, on choosing a marketing agency, websites that convert, marketing, SEO and automations.';
 const jsonLd = graph(
   { '@type': 'Blog', '@id': new URL('/blog#blog', Astro.site).toString(), url: new URL('/blog', Astro.site).toString(), name: 'RastgarX Blog', description, publisher: { '@id': new URL('/#business', Astro.site).toString() } },
   breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }]),

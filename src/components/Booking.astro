@@ -5,9 +5,14 @@ const open = Math.max(0, Math.min(5, site.openSlots));
 const slots = [1, 2, 3, 4, 5].map((n) => ({ num: '0' + n, open: n > 5 - open }));
 ---
 <section id="book" class="booking center-section">
-  <span class="tag">READY TO GET STARTED?</span>
-  <h2 class="h-center">Ready to put your business on autopilot<span class="dot">?</span></h2>
-  <p class="muted">Book your free call today and see how a rebuilt site, sharper marketing and smart automations can transform your funnel.</p>
+  <span class="tag">NEXT STEP</span>
+  <h2 class="h-center">Find out where your customers are leaking<span class="dot">.</span></h2>
+  <p class="muted">A free call. We look at your ads, your website and how fast your enquiries get answered, and tell you plainly where customers are being lost. If we’re not the right fit, you’ll hear that too.</p>
+  <ol class="book-steps">
+    <li><span class="accent">01</span> We look at your ads, site and follow-up before the call</li>
+    <li><span class="accent">02</span> You leave knowing which leak costs you most</li>
+    <li><span class="accent">03</span> No sales pitch unless the fix is worth it</li>
+  </ol>
   <div class="slots">
     {slots.map((s) => s.open ? (
       <a class="slot is-open lift" href="/contact" aria-label={`Slot ${s.num} available, book a free call`}>
@@ -25,5 +30,5 @@ const slots = [1, 2, 3, 4, 5].map((n) => ({ num: '0' + n, open: n > 5 - open }))
       </div>
     ))}
   </div>
-  <a class="cta" href="/contact">BOOK A FREE CALL</a>
+  <a class="cta" href="/contact">BOOK A FREE LEAK AUDIT</a>
 </section>

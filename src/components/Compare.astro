@@ -1,0 +1,34 @@
+---
+// Typical agency vs RastgarX, row by row.
+const rows = [
+  { axis: 'Scope', agency: 'One channel, usually the ads', us: 'Ads, website and follow-up as one system' },
+  { axis: 'First move', agency: 'Launch campaigns, then optimise', us: 'Find the leaks, fix them, then spend' },
+  { axis: 'What they measure', agency: 'Likes, reach and clicks', us: 'Enquiries and customers booked' },
+  { axis: 'When results stall', agency: 'Blames the market or the budget', us: 'Checks every leak, including the ones we built' },
+  { axis: 'A call at 9pm', agency: 'Not their problem', us: 'Answered, and booked into your calendar' },
+  { axis: 'Reporting', agency: 'Platform screenshots', us: 'What turned into paying customers' },
+  { axis: 'Clients', agency: 'As many as will sign', us: 'Five new clients a year' },
+];
+---
+<section class="compare" aria-labelledby="compare-h">
+  <div class="problem-head">
+    <div>
+      <span class="tag">THE DIFFERENCE</span>
+      <h2 id="compare-h" class="h-section">Most agencies run your ads.<br />We own the outcome<span class="dot">.</span></h2>
+    </div>
+    <p class="lede muted">The difference sounds small until you’ve paid for it.</p>
+  </div>
+  <div class="compare-scroll">
+    <table class="compare-table">
+      <caption class="visually-hidden">How a typical agency compares with RastgarX</caption>
+      <thead>
+        <tr><th scope="col"><span class="visually-hidden">Area</span></th><th scope="col">Typical agency</th><th scope="col">RastgarX</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr><th scope="row">{r.axis}</th><td class="muted" data-label="Typical agency">{r.agency}</td><td data-label="RastgarX">{r.us}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

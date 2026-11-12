@@ -26,7 +26,7 @@ export const cities: City[] = [
     slug: 'lahore',
     name: 'Lahore',
     province: 'Punjab',
-    intro: 'RastgarX is a web design, website development and digital marketing partner for Lahore brands that want a site and ads people remember, and that turn visits into orders and bookings.',
+    intro: 'RastgarX is a growth partner for Lahore brands, covering web design, website development and digital marketing for brands that want a site and ads people remember, and that turn visits into orders and bookings.',
     context: 'Lahore is the capital of Punjab and Pakistan’s second-largest city, known for its food, fashion and education. Local customers compare brands on Instagram and Google before they buy, so design quality and search visibility decide who gets the order.',
     industries: ['Fashion and clothing brands', 'Restaurants and cafés', 'Schools and academies', 'Real estate', 'Clinics and healthcare'],
     nearby: ['sheikhupura', 'gujranwala', 'faisalabad', 'sahiwal'],

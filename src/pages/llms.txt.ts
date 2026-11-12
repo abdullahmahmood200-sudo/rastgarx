@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ site: base }) => {
 
 > ${site.description}
 
-${site.name} is a digital marketing agency and website development company based in ${site.city}, ${site.country}. It serves businesses across Pakistan remotely by video call and WhatsApp, has built websites for clinics in Saudi Arabia, and takes on only five new clients a year.
+${site.name} is a growth partner for businesses: a digital marketing agency, website development company and automation team in one, based in ${site.city}, ${site.country}. It serves businesses across Pakistan remotely by video call and WhatsApp, has built websites for clinics in Saudi Arabia, and takes on only five new clients a year.
 
 ## Key facts
 

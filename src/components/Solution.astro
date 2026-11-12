@@ -1,32 +1,33 @@
 ---
 import Arrow from './Arrow.astro';
 
-const features = [
-  { title: 'High-converting design', body: 'Every page built to move visitors toward one action.' },
-  { title: 'Custom animations', body: 'Smooth, purposeful motion that keeps people engaged instead of bouncing.' },
-  { title: 'Ad generation', body: 'Images, copy, and variations, ready for whatever platform you run.' },
-  { title: 'Multiple formats', body: 'Different sizes and versions so you’re covered across placements.' },
+// The method: four stages, run in order.
+const stages = [
+  { title: 'Diagnose', body: 'A free leak audit of your ads, your website and how fast enquiries get answered. You get a plain list of where customers are being lost, and which leak costs you most.' },
+  { title: 'Rebuild', body: 'Fix what catches the customer first: a fast, animated website built around one action, and automations that answer every call and message in seconds.' },
+  { title: 'Attract', body: 'Then turn up the attention: reels, ads and SEO aimed at people ready to buy, landing on a system that can actually hold them.' },
+  { title: 'Compound', body: 'Track what turns into paying customers, keep what works, cut what doesn’t, so every month costs less than the last.' },
 ];
 ---
 <section id="solution" class="solution">
   <div class="solution-copy">
-    <p class="eyebrow">(The Solution)</p>
-    <h2 class="h-section">Meet your<br />growth system<span class="dot">.</span></h2>
+    <p class="eyebrow">(The method)</p>
+    <h2 class="h-section">Find the leaks.<br />Fix them in order<span class="dot">.</span></h2>
     <span class="tag-accent">Websites · Marketing · Automations</span>
-    <p class="lede">A custom-built, animated website, marketing that brings the right people in, and automations that answer and book them, all working as one system.</p>
+    <p class="lede">We don’t start with ads. We start by finding where your customers are being lost, then fix those places first, so the attention you pay for lands somewhere it can turn into revenue.</p>
     <div class="foundation">
-      <span>The foundation it runs on</span>
-      <span>It starts before the click happens.</span>
+      <span>The rule we work by</span>
+      <span>Fix the leaks before you turn up the spend.</span>
     </div>
-    <a class="link-underline" href="#work">See what we build <Arrow /></a>
+    <a class="link-underline" href="#work">See the whole system <Arrow /></a>
   </div>
   <div class="features">
-    {features.map((f, i) => (
+    {stages.map((s, i) => (
       <div class="feature">
         <span>{String(i + 1).padStart(2, '0')}</span>
         <div>
-          <h3>{f.title}</h3>
-          <p class="body muted">{f.body}</p>
+          <h3>{s.title}</h3>
+          <p class="body muted">{s.body}</p>
         </div>
       </div>
     ))}

@@ -1,0 +1,33 @@
+---
+const yes = [
+  'People already enquire, but too few become customers',
+  'You spend on ads and can’t see what it brings back',
+  'Calls and WhatsApps go unanswered after hours',
+  'You want one team accountable for the whole system',
+];
+const no = [
+  'You only want someone to post on social media',
+  'You need results within days to stay afloat',
+  'You want the cheapest quote, not the right fix',
+  'Your offer and website aren’t open to change',
+];
+---
+<section class="fit" aria-labelledby="fit-h">
+  <div class="problem-head">
+    <div>
+      <span class="tag">FIT</span>
+      <h2 id="fit-h" class="h-section">This isn’t for<br />every business<span class="dot">.</span></h2>
+    </div>
+    <p class="lede muted">We take five new clients a year. If we can’t fix your leaks, we’ll tell you on the call instead of taking your money.</p>
+  </div>
+  <div class="fit-grid">
+    <div class="fit-col">
+      <h3>Worth a conversation</h3>
+      <ul>{yes.map((t) => <li><span class="fit-mark is-yes" aria-hidden="true">+</span>{t}</li>)}</ul>
+    </div>
+    <div class="fit-col">
+      <h3>Not a fit</h3>
+      <ul>{no.map((t) => <li><span class="fit-mark" aria-hidden="true">−</span>{t}</li>)}</ul>
+    </div>
+  </div>
+</section>

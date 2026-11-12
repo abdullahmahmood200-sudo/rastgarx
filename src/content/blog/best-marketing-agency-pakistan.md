@@ -22,7 +22,7 @@ faqs:
 
 Most businesses search for the best marketing agency in Pakistan and end up comparing logos, follower counts and monthly fees. Those are easy to compare, and they say very little about whether an agency can bring you customers.
 
-RastgarX is a marketing agency too, so keep that in mind as you read. The checks below work for any agency, including us.
+RastgarX is a growth partner that does this work too, so keep that in mind as you read. The checks below work for any agency, including us.
 
 ## What makes a marketing agency good?
 
