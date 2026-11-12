@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import FooterCompact from '../components/FooterCompact.astro';
+import { absolute, breadcrumbSchema, graph } from '../data/schema';
+
+// Reels and brand kit pages live in public/work/marketing/.
+const base = '/work/marketing';
+
+const reels = [
+  { name: 'RastgarX', category: 'Agency promo', file: 'rastgarx-web-reel' },
+  { name: 'From scroll to sale', category: 'E-commerce explainer', file: 'loxvo-scroll-to-sale' },
+  { name: 'The drop', category: '3D product hook', file: 'loxvo-the-drop' },
+  { name: 'Milk at the back', category: 'Animated story', file: 'loxvo-milk-explainer' },
+  { name: 'Pulse', category: 'Aesthetic clinic ad', file: 'pulse-clinic-ad' },
+];
+
+const kits = [
+  {
+    name: 'Loxvo',
+    category: 'E-commerce technology',
+    body: 'A full identity for Loxvo, an e-commerce technology and AI consulting firm: an infinity-loop mark, a white, black and blue palette, typography, voice and real applications.',
+    pages: ['loxvo-1', 'loxvo-2', 'loxvo-3', 'loxvo-4'],
+    labels: ['Cover', 'Logo versions', 'Colour palette', 'Applications'],
+    shape: 'wide',
+  },
+  {
+    name: 'Klaudio',
+    category: 'E-commerce consultancy',
+    body: 'Identity for Klaudio, built around a K drawn as a small network: one hub, two endpoints, connecting the systems behind a store.',
+    pages: ['klaudio-1', 'klaudio-2', 'klaudio-3'],
+    labels: ['Cover', 'The mark', 'Logo versions'],
+    shape: 'wide',
+  },
+  {
+    name: 'Gainslab',
+    category: 'Fitness',
+    body: 'A bold red, black and white identity for a fitness brand, with a custom wordmark, typography and gym applications.',
+    pages: ['gainslab-1', 'gainslab-2', 'gainslab-3'],
+    labels: ['Colour palette', 'Logo variations', 'Applications'],
+    shape: 'wide',
+  },
+  {
+    name: 'RastgarX social kit',
+    category: 'Instagram, TikTok & Shorts',
+    body: 'Our own social kit: six colours with fixed roles, three fonts, three post templates and one end card, so every reel looks like the same brand.',
+    pages: ['rastgarx-1', 'rastgarx-2'],
+    labels: ['Colours', 'Post templates'],
+    shape: 'tall',
+  },
+];
+
+const jsonLd = graph(
+  {
+    '@type': 'CollectionPage',
+    url: absolute('/marketing', Astro.site),
+    name: 'Marketing portfolio: reels and brand kits',
+    provider: { '@id': absolute('/#business', Astro.site) },
+    about: { '@type': 'Service', name: 'Digital marketing and branding', provider: { '@id': absolute('/#business', Astro.site) } },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: [...reels.map((r) => `${r.name} (${r.category} reel)`), ...kits.map((k) => `${k.name} brand kit`)].map((name, i) => ({ '@type': 'ListItem', position: i + 1, name })),
+    },
+  },
+  breadcrumbSchema(Astro.site, [{ name: 'Home', path: '/' }, { name: 'Marketing', path: '/marketing' }]),
+);
+
+const links = [
+  { href: '/work', label: 'WORK', current: true },
+  { href: '/#solution', label: 'STUDIO' },
+  { href: '/blog', label: 'BLOG' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+<Base title="Marketing Portfolio: Reels, Ads & Brand Kits | RastgarX" description="Short-form video ads, reels and brand identity kits made by RastgarX, a digital marketing agency in Pakistan, for e-commerce, clinic and fitness brands.">
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+  <div id="top" class="page">
+    <div class="wrap">
+      <Header links={links} homeHref="/" bookHref="/#book" />
+      <div class="rule"></div>
+
+      <main>
+        <section class="animated-web">
+          <div class="animated-web-head">
+            <div>
+              <p class="eyebrow">(Marketing)</p>
+              <h1 class="display">Made to stop the scroll<span class="dot">.</span></h1>
+            </div>
+            <p class="lede">Short-form video ads, reels and brand identities for e-commerce, clinic and fitness brands, built to be noticed in the first second and remembered after.</p>
+          </div>
+
+          <div class="mk-block">
+            <h2 class="mk-h2">Reels &amp; video ads<span class="dot">.</span></h2>
+            <div class="mk-reels">
+              {reels.map((r) => (
+                <figure class="aw-item">
+                  <div class="mk-reel">
+                    <video data-mk-video src={`${base}/${r.file}.mp4`} poster={`${base}/${r.file}-poster.jpg`} muted loop playsinline preload="none" aria-label={`${r.name}, ${r.category.toLowerCase()} reel`}></video>
+                  </div>
+                  <figcaption class="mk-cap"><span class="mk-name">{r.name}</span><span class="work-cat">({r.category})</span></figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+
+          <div class="mk-block">
+            <h2 class="mk-h2">Brand kits<span class="dot">.</span></h2>
+            {kits.map((k) => (
+              <article class="mk-kit">
+                <div class="mk-kit-head">
+                  <span class="auto-title"><span class="aw-name">{k.name}</span><span class="work-cat">({k.category})</span></span>
+                  <p class="auto-body muted">{k.body}</p>
+                </div>
+                <div class:list={['mk-pages', `is-${k.shape}`]} style={`--cols:${k.pages.length}`}>
+                  {k.pages.map((p, i) => (
+                    <figure class="mk-page">
+                      <img src={`${base}/${p}.webp`} alt={`${k.name} brand kit, ${k.labels[i].toLowerCase()}`} loading="lazy" decoding="async" />
+                      <figcaption class="work-cat">{k.labels[i]}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="work-cta center-section">
+          <span class="tag">WORK WITH US</span>
+          <h2 class="h-center">Want content people stop for<span class="dot">?</span></h2>
+          <a class="cta" href="/#book">BOOK A FREE CALL</a>
+        </section>
+      </main>
+    </div>
+    <FooterCompact />
+  </div>
+</Base>
+
+<script>
+  // Play each reel only while it is on screen; reduced-motion visitors keep the poster.
+  const videos = document.querySelectorAll<HTMLVideoElement>('[data-mk-video]');
+  if (videos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      });
+    }, { threshold: 0.25 });
+    videos.forEach((video) => observer.observe(video));
+  }
+</script>

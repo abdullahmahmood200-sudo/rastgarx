@@ -38,6 +38,7 @@ ${site.name} is a digital marketing agency and website development company based
 - [Home](${url('/')})
 - [Work](${url('/work')}): selected projects and case studies
 - [Animated web development portfolio](${url('/animated-web-development')}): websites built by RastgarX
+- [Marketing portfolio](${url('/marketing')}): reels, video ads and brand identity kits made by RastgarX
 - [Automations portfolio](${url('/automations')}): n8n workflows and AI agents built by RastgarX, including AI voice booking, WhatsApp agents, lead nurturing, CRM onboarding and lead generation
 - [Blog](${url('/blog')}): guides on marketing agencies, websites, marketing, SEO and automations
 ${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}

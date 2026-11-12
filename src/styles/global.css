@@ -190,6 +190,25 @@ img, video { display: block; max-width: 100%; }
 @media (max-width: 900px) { .auto-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; } }
 @media (max-width: 560px) { .auto-media { border-radius: 14px; padding: 10px; } .auto-body { font-size: 16px; } }
 
+/* ---------- Marketing portfolio ---------- */
+.mk-block { display: flex; flex-direction: column; gap: 32px; }
+.mk-h2 { font-size: clamp(30px, 3.2vw, 46px); line-height: 1; letter-spacing: -0.04em; text-transform: uppercase; border-top: 1px solid var(--line); padding-top: 20px; }
+.mk-reels { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.mk-reel { aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: #000; }
+.mk-reel video { width: 100%; height: 100%; object-fit: cover; }
+.mk-cap { display: flex; flex-direction: column; gap: 2px; }
+.mk-name { font-size: 20px; font-weight: 400; letter-spacing: -0.03em; text-transform: uppercase; }
+.mk-kit { display: flex; flex-direction: column; gap: 20px; padding-bottom: 24px; }
+.mk-kit + .mk-kit { border-top: 1px solid var(--line-soft); padding-top: 32px; }
+.mk-kit-head { display: flex; flex-direction: column; gap: 10px; }
+.mk-pages { display: grid; gap: 16px; }
+.mk-pages.is-wide { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
+.mk-pages.is-tall { grid-template-columns: repeat(2, minmax(0, 340px)); }
+.mk-page { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.mk-page img { width: 100%; height: auto; border-radius: 10px; background: var(--surface); }
+@media (max-width: 900px) { .mk-reels { grid-template-columns: repeat(3, minmax(0, 1fr)); } .mk-pages.is-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .mk-reels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } .mk-reel { border-radius: 12px; } .mk-name { font-size: 17px; } .mk-pages.is-tall { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mk-pages.is-wide { grid-template-columns: minmax(0, 1fr); } }
+
 /* ---------- Blog ---------- */
 .blog { padding-top: 28px; display: flex; flex-direction: column; }
 .blog-head { padding-top: 96px; display: flex; flex-direction: column; gap: 24px; }
