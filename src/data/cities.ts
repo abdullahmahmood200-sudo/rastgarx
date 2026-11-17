@@ -203,7 +203,7 @@ export const cityServices = [
   { title: 'Website development', body: 'Custom websites built from scratch for {city} businesses: fast, mobile-first, secure and easy to update.' },
   { title: 'Web design', body: 'Animated, brand-led web design that makes your business look like the leader in {city} and turns visitors into enquiries.' },
   { title: 'E-commerce websites', body: 'Online stores that make it simple for customers in {city} and across Pakistan to browse, order and pay.' },
-  { title: 'Marketing & ads', body: 'Scroll-stopping ad creatives for social media, posters and billboards that put your product front and centre.' },
+  { title: 'Performance marketing', body: 'Meta and Google ads with scroll-stopping creative, tracked to the enquiries and sales they actually bring in.' },
   { title: 'SEO services', body: 'Technical, on-page and local SEO so people searching in {city} find your business on Google and Google Maps.' },
   { title: 'Automations', body: 'AI voice operators and automated workflows that answer every call, day or night, and book the customer in.' },
 ];

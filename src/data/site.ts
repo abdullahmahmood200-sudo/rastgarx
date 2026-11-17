@@ -4,7 +4,7 @@ export const site = {
   name: 'RastgarX',
   title: 'RastgarX | Growth Partner & Marketing Agency in Pakistan',
   description:
-    'RastgarX is a growth partner for businesses in Pakistan: a digital marketing agency, web studio and automation team in one, based in Islamabad.',
+    'RastgarX is a growth partner for businesses in Pakistan: a performance marketing agency, web studio and automation team in one, based in Islamabad.',
 
   // Full URLs of your official profiles (Instagram, LinkedIn, Facebook, Google Business...).
   // They tell Google and AI tools these accounts are the same business.

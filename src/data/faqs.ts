@@ -2,7 +2,7 @@
 export const homeFaqs = [
   {
     q: 'What does RastgarX do?',
-    a: 'RastgarX is a growth partner for businesses in Pakistan, based in Islamabad: a digital marketing agency, web studio and automation team in one. We find the three places businesses lose customers, before the click, after the click and after the enquiry, and fix them as one system with marketing, websites and automations.',
+    a: 'RastgarX is a growth partner for businesses in Pakistan, based in Islamabad: a performance marketing agency, web studio and automation team in one. We find the three places businesses lose customers, before the click, after the click and after the enquiry, and fix them as one system with performance marketing, websites and automations.',
   },
   {
     q: 'How is a growth partner different from a marketing agency?',

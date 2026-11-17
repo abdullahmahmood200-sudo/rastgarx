@@ -16,7 +16,7 @@ ${site.name} is a growth partner for businesses: a digital marketing agency, web
 ## Key facts
 
 - Location: studio in ${site.city}, ${site.country}
-- Best known for: three services working as one system: websites, marketing and automations
+- Best known for: three services working as one system: websites, performance marketing and automations
 - Portfolio includes: aesthetic and dental clinics, restaurants, jewellery brands, e-commerce stores and technology companies
 - Pricing: each project is priced individually, with a written proposal covering a fixed price, timeline and revision rounds; projects start with a 50% deposit
 - First step: a free call
@@ -24,7 +24,7 @@ ${site.name} is a growth partner for businesses: a digital marketing agency, web
 ## Services
 
 - Websites: website development, animated web design and e-commerce stores
-- Marketing: ad creatives for social media, posters and billboards, plus SEO (technical, on-page and local)
+- Performance marketing: Meta and Google ads with scroll-stopping creative and reels, tracked to the sales they bring in, plus SEO (technical, on-page and local)
 - Automations: AI voice operators that answer business calls and book customers in, and automated workflows such as lead follow-up
 
 ## Contact
@@ -38,9 +38,9 @@ ${site.name} is a growth partner for businesses: a digital marketing agency, web
 - [Home](${url('/')})
 - [Work](${url('/work')}): selected projects and case studies
 - [Animated web development portfolio](${url('/animated-web-development')}): websites built by RastgarX
-- [Marketing portfolio](${url('/marketing')}): reels, video ads and brand identity kits made by RastgarX
+- [Performance marketing portfolio](${url('/marketing')}): reels, video ads and brand identity kits made by RastgarX
 - [Automations portfolio](${url('/automations')}): n8n workflows and AI agents built by RastgarX, including AI voice booking, WhatsApp agents, lead nurturing, CRM onboarding and lead generation
-- [Blog](${url('/blog')}): guides on marketing agencies, websites, marketing, SEO and automations
+- [Blog](${url('/blog')}): guides on marketing agencies, websites, performance marketing, SEO and automations
 ${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}
 - [Contact](${url('/contact')}): tell us about your business, revenue and goals
 - [Careers](${url('/careers')}): open roles at RastgarX in Islamabad and remote
