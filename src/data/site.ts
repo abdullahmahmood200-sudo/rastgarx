@@ -15,9 +15,7 @@ export const site = {
   timeZone: 'Asia/Karachi',
   mapsUrl: 'https://maps.google.com/?q=Islamabad,+Pakistan',
 
-  // NOTE: the original design uses a Rastgarx.com address on a RastgarX site.
-  // Change this if your inbox is on a different domain.
-  email: 'Team@Rastgarx.com',
+  email: 'rastgarrx@gmail.com',
   phone: '+92 324 7626969',
 
   // How many of the five booking slots show as AVAILABLE (0–5).
