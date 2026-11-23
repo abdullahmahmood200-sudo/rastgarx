@@ -15,6 +15,7 @@ const pages: { path: string; priority: string; changefreq: string }[] = [
   { path: '/animated-web-development', priority: '0.8', changefreq: 'monthly' },
   { path: '/marketing', priority: '0.8', changefreq: 'monthly' },
   { path: '/automations', priority: '0.8', changefreq: 'monthly' },
+  { path: '/break-even-roas', priority: '0.7', changefreq: 'monthly' },
   ...projects.filter((p) => !isThinProject(p)).map((p) => ({ path: projectHref(p), priority: '0.6', changefreq: 'monthly' })),
   { path: '/blog', priority: '0.8', changefreq: 'weekly' },
   ...posts.map((p) => ({ path: `/blog/${p.id}`, priority: '0.7', changefreq: 'monthly' })),

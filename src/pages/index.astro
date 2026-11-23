@@ -11,6 +11,7 @@ import Footer from '../components/Footer.astro';
 import HomeFaq from '../components/HomeFaq.astro';
 import Compare from '../components/Compare.astro';
 import Fit from '../components/Fit.astro';
+import Arrow from '../components/Arrow.astro';
 import { businessSchema, faqSchema, graph } from '../data/schema';
 import { homeFaqs } from '../data/faqs';
 import { site } from '../data/site';
@@ -27,6 +28,7 @@ const jsonLd = graph(
     <div class="wrap">
       <Header />
       <div class="rule"></div>
+      <a class="tool-strip" href="/break-even-roas"><span class="tag-accent">FREE TOOL</span><span>Is your ROAS actually profitable? Find your break-even ROAS</span><Arrow /></a>
       <InfoRow />
       <main>
         <Hero />

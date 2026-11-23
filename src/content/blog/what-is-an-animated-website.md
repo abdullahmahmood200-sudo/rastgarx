@@ -26,10 +26,10 @@ This guide explains what an animated website is, when animated web design is wor
 
 ## What is an animated website?
 
-An animated website uses motion as part of its design. Instead of a page that sits still, parts of it respond as the visitor scrolls, hovers or taps. Common examples of website animation include:
+An animated website uses motion as part of its design. Parts of the page respond as the visitor scrolls, hovers or taps. Common examples of website animation include:
 
 - **Scroll animations:** headings, images and sections that move into place as you scroll down.
-- **Page transitions:** a smooth change from one page to the next instead of a blank flash.
+- **Page transitions:** a smooth change from one page to the next.
 - **Interactive product views:** a product that turns, opens or changes colour as you scroll.
 - **Micro-interactions:** buttons, menus and forms that react when touched, so the site feels responsive.
 - **Animated illustrations and icons:** small moving graphics that explain a step or a feature.
@@ -68,25 +68,25 @@ Animation is the wrong choice when:
 
 ## Do animations slow down a website?
 
-They can, but they do not have to. Speed problems usually come from how the animation is built, not from animation itself.
+They can, but they do not have to. Speed problems usually come from how the animation is built.
 
 What keeps an animated website fast:
 
-1. **Compressed media.** Short, compressed videos and modern image formats instead of large files.
+1. **Compressed media.** Short, compressed videos and modern image formats.
 2. **Animating the right things.** Movement and fading are cheap for a browser to draw; constantly resizing and re-laying out the page is not.
 3. **Loading only what is on screen.** Videos and images further down load when the visitor reaches them.
 4. **Content first.** Text, prices and buttons appear immediately, and motion is added on top.
-5. **Testing on a real phone.** Check the site on an ordinary mobile connection, not just on a fast office laptop.
+5. **Testing on a real phone.** Check the site on an ordinary mobile connection.
 
 ## Are animated websites bad for SEO?
 
-Not when they are built properly. For search engines, an animated website needs the same basics as any site: real text on the page rather than text baked into images or videos, fast loading, a layout that does not jump around while loading, and clear headings and links.
+Not when they are built properly. For search engines, an animated website needs the same basics as any site: real text on the page (search engines can’t read text baked into images or videos), fast loading, a layout that does not jump around while loading, and clear headings and links.
 
 Animation becomes an SEO problem when it delays content, hides important text until someone scrolls, or makes the page unstable. Google measures page experience, so a slow or jumpy animated site can rank lower than a plain one.
 
 ## What it takes to build a good animated website
 
-A good animated website is planned, not decorated at the end. The process usually looks like this:
+A good animated website is planned from the start. The process usually looks like this:
 
 1. **Start with the goal.** Decide the one action the site should drive, such as bookings, orders or calls.
 2. **Write the message.** Headlines and copy come before any motion.

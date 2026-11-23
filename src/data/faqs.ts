@@ -10,15 +10,15 @@ export const homeFaqs = [
   },
   {
     q: 'What is a leak audit?',
-    a: 'It is the first thing we do, and it is free. We look at your ads, your website and how quickly your enquiries get answered, then show you plainly where customers are being lost and which leak is costing you the most.',
+    a: 'It is the first thing we do, and it is free. We look at your ads, your website and how quickly your enquiries get answered, and show you plainly where customers are being lost and which leak is costing you the most.',
   },
   {
     q: 'Can you guarantee results?',
-    a: 'No honest partner can promise a number before seeing your business. What we do is set targets from your own figures after the audit, show you live work we have built, and report on what turned into customers, not on likes or reach.',
+    a: 'No honest partner can promise a number before seeing your business. What we do is set targets from your own figures after the audit, show you live work we have built, and report on what turned into customers.',
   },
   {
     q: 'Why do you take only five new clients a year?',
-    a: 'Fixing all three leaks properly takes real attention from the same small team. Keeping the number low means every client gets that team, not a junior account manager.',
+    a: 'Fixing all three leaks properly takes real attention from the same small team. Keeping the number low means every client gets that same senior team.',
   },
   {
     q: 'Where does RastgarX work?',

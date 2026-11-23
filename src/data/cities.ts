@@ -17,7 +17,7 @@ export const cities: City[] = [
     slug: 'karachi',
     name: 'Karachi',
     province: 'Sindh',
-    intro: 'RastgarX builds animated, high-converting websites, ad creatives and SEO for Karachi businesses that want more customers from the web, not just a page that exists.',
+    intro: 'RastgarX builds animated, high-converting websites, ad creatives and SEO for Karachi businesses that want more customers from the web.',
     context: 'Karachi is Pakistan’s largest city, its financial centre and its main seaport. Competition for attention is fierce, from retail brands in Clifton and DHA to importers and logistics firms around the port, so a slow or generic website loses customers to the next result on Google.',
     industries: ['Retail and e-commerce', 'Import, export and logistics', 'Textiles and garments', 'Real estate', 'Restaurants and food'],
     nearby: ['hyderabad', 'sukkur', 'quetta', 'lahore'],

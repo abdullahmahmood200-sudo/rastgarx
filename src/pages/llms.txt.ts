@@ -43,6 +43,7 @@ ${site.name} is a growth partner for businesses: a digital marketing agency, web
 - [Blog](${url('/blog')}): guides on marketing agencies, websites, performance marketing, SEO and automations
 ${posts.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}`)}): ${p.data.description}`).join('\n')}
 - [Contact](${url('/contact')}): tell us about your business, revenue and goals
+- [Break-even ROAS calculator](${url('/break-even-roas')}): free PKR calculator for ecommerce brands; shows the ROAS needed to break even after product, delivery, COD and returns
 - [Careers](${url('/careers')}): open roles at RastgarX in Islamabad and remote
 - [Locations](${url('/locations')}): cities served across Pakistan
 - [Privacy Policy](${url('/privacy')})
