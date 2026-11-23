@@ -903,8 +903,6 @@ html.has-dot-cursor, html.has-dot-cursor * { cursor: none !important; }
 .careers-open a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 @media (max-width: 700px) { .career-cols { grid-template-columns: minmax(0, 1fr); } .careers-open { padding-bottom: 80px; } }
 
-/* ---------- Homepage tool strip ---------- */
-.tool-strip { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 17px; color: var(--ink-strong); }
-.tool-strip .tag-accent { flex: none; font-size: 13px; padding: 4px 10px; }
-.tool-strip:hover { color: var(--accent); }
-@media (max-width: 560px) { .tool-strip { font-size: 15px; gap: 10px; align-items: flex-start; } }
+/* ---------- Navbar: calculator link stands out in green ---------- */
+.nav a[href="/break-even-roas"]:not(.is-current) { color: var(--accent); }
+.nav a[href="/break-even-roas"]:not(.is-current):hover { color: var(--on-accent); }
