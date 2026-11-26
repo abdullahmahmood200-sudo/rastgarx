@@ -201,6 +201,11 @@ img, video { display: block; max-width: 100%; }
 .mk-kit { display: flex; flex-direction: column; gap: 20px; padding-bottom: 24px; }
 .mk-kit + .mk-kit { border-top: 1px solid var(--line-soft); padding-top: 32px; }
 .mk-kit-head { display: flex; flex-direction: column; gap: 10px; }
+.mk-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; }
+.mk-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; padding: 20px; border-radius: 14px; background: var(--surface); }
+.mk-stat dd { margin: 0; font-size: clamp(28px, 3vw, 44px); line-height: 1; letter-spacing: -0.04em; color: var(--accent); }
+@media (max-width: 900px) { .mk-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .mk-stats { gap: 10px; } .mk-stat { padding: 16px; border-radius: 12px; } }
 .mk-pages { display: grid; gap: 16px; }
 .mk-pages.is-wide { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
 .mk-pages.is-tall { grid-template-columns: repeat(2, minmax(0, 340px)); }
