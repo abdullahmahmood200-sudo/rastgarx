@@ -206,6 +206,8 @@ img, video { display: block; max-width: 100%; }
 .mk-stat dd { margin: 0; font-size: clamp(28px, 3vw, 44px); line-height: 1; letter-spacing: -0.04em; color: var(--accent); }
 @media (max-width: 900px) { .mk-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .mk-stats { gap: 10px; } .mk-stat { padding: 16px; border-radius: 12px; } }
+.mk-shot { margin: 0; display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+.mk-shot img { width: 100%; height: auto; border-radius: 10px; background: var(--surface); }
 .mk-pages { display: grid; gap: 16px; }
 .mk-pages.is-wide { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
 .mk-pages.is-tall { grid-template-columns: repeat(2, minmax(0, 340px)); }

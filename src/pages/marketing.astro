@@ -20,6 +20,7 @@ const campaigns = [
     name: 'Tradelle',
     category: 'Meta Ads',
     period: '22 Oct – 20 Nov 2026',
+    shot: 'tradelle-ads-manager',
     body: 'Sales campaigns for Tradelle across three Meta campaigns: two sales campaigns running on daily budgets of Rs2,000 and Rs2,500, plus a conversions campaign. Close to 400,000 impressions turned into 212 sales in one month.',
     stats: [
       { value: '212', label: 'Sales' },
@@ -32,6 +33,7 @@ const campaigns = [
     name: 'Travel Souq',
     category: 'Travel · Meta Ads',
     period: '27 Oct – 25 Nov 2026',
+    shot: 'travel-souq-ads-manager',
     body: 'A lean test for Travel Souq with an instant lead form and a click-to-message campaign side by side. Messaging won on cost, bringing in conversations at about a third of the price of a form lead.',
     stats: [
       { value: '10', label: 'Leads & conversations' },
@@ -117,7 +119,10 @@ const links = [
                     </div>
                   ))}
                 </dl>
-                <p class="work-cat">Last 30 days, {c.period}. Figures from Meta Ads Manager.</p>
+                <figure class="mk-shot">
+                  <img src={`${base}/${c.shot}.webp`} alt={`Meta Ads Manager results for ${c.name}, last 30 days, ${c.period}`} loading="lazy" decoding="async" />
+                  <figcaption class="work-cat">Last 30 days, {c.period}. Screenshot from Meta Ads Manager.</figcaption>
+                </figure>
               </article>
             ))}
           </div>
