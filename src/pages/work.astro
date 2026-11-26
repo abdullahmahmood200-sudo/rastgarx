@@ -12,7 +12,7 @@ const jsonLd = graph(
 
 const items = projects.map((p, i) => ({ ...p, href: projectHref(p), look: looks[i % looks.length] }));
 const links = [
-  { href: '/work', label: 'WORK', current: true },
+  { href: '/#work', label: 'WORK', current: true },
   { href: '/#solution', label: 'STUDIO' },
   { href: '/careers', label: 'CAREERS' },
   { href: '/break-even-roas', label: 'ROAS TOOL' },
