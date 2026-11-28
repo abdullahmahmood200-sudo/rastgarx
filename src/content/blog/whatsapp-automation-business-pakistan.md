@@ -51,7 +51,7 @@ Three things make WhatsApp automation especially useful here:
 
 When a customer places an order on your Shopify, WooCommerce or custom store, they get a WhatsApp message with the order summary and two buttons: **Confirm** and **Cancel**. Confirmed orders move to dispatch. Cancelled orders stop before they cost you delivery both ways. Orders with no reply get a reminder, then a call from your team.
 
-This is usually the first automation an ecommerce store should build, because the saving shows up directly in fewer refused parcels.
+This is usually the first automation an ecommerce store should build, because the saving shows up directly in fewer refused parcels. For the other fixes that work alongside it, read our guide on [how to reduce COD returns in Pakistan](/blog/reduce-cod-returns-pakistan).
 
 ### 2. Instant replies to ad enquiries
 
