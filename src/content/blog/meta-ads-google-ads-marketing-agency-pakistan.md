@@ -129,7 +129,7 @@ Be careful with guaranteed sales or ROAS figures. No agency can promise a number
 
 1. **Running ads with no conversion tracking,** so the platforms optimise for clicks and the owner guesses at results.
 2. **Scaling on ROAS alone,** with no break-even ROAS to compare it to.
-3. **Ignoring COD returns.** In Pakistan, returned COD orders cost delivery both ways. Count them in your margin.
+3. **Ignoring COD returns.** In Pakistan, returned COD orders cost delivery both ways. Count them in your margin, and cut them with [WhatsApp order confirmation](/blog/whatsapp-automation-business-pakistan) before dispatch.
 4. **Sending paid traffic to a slow product page** that loads poorly on mobile data.
 5. **Using one creative for months.** Ad fatigue raises costs. Plan new creative every week.
 6. **Discounting to fix weak ads.** A discount lowers your margin, which raises your break-even ROAS.
